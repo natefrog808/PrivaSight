@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant User
+    participant Researcher
+    participant DataVault NFT
+    participant Privacy Layer
+    participant Storage Layer
+    participant Analytics Layer
+    
+    User->>+User: Creates encrypted data
+    User->>+Storage Layer: Upload encrypted data
+    Storage Layer-->>-User: Returns data hash
+    
+    User->>+DataVault NFT: mintDataVault()
+    DataVault NFT-->>-User: Mints NFT with data hash
+    
+    Researcher->>+DataVault NFT: requestAccess()
+    DataVault NFT-->>User: Notifies of access request
+    User->>+DataVault NFT: approveAccess()
+    DataVault NFT-->>-Researcher: Access approved
+    
+    Researcher->>+Privacy Layer: Initiate computation
+    Privacy Layer->>+Storage Layer: Request encrypted data (with ZKP verification)
+    Storage Layer-->>-Privacy Layer: Return encrypted data
+    
+    Privacy Layer->>+Analytics Layer: Process via SMPC or Homomorphic Encryption
+    Analytics Layer-->>-Privacy Layer: Return aggregated insights
+    
+    Privacy Layer-->>-Researcher: Deliver insights
+    
+    Researcher->>+DataVault NFT: publishResults() & pay compensation
+    DataVault NFT->>User: Transfer PRIVA tokens
+    DataVault NFT-->>-User: Update usage statistics
