@@ -6,7 +6,7 @@
 
 PrivaSight is a decentralized platform that empowers users to monetize their personal data while maintaining complete privacy. By combining blockchain technology, privacy-preserving computation, and a token economy, PrivaSight creates a secure ecosystem where data owners can earn rewards while researchers and analysts gain valuable insights—all without exposing raw data.
 
-[![License: Apache2](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/MIT)
 ![Smart Contract Coverage](https://img.shields.io/badge/contract--coverage-97%25-brightgreen)
 ![Version](https://img.shields.io/badge/version-0.1.0--alpha-orange)
 
