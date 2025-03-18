@@ -1,7 +1,5 @@
 # PrivaSight
 
-![PrivaSight Banner](assets/images/privasight-banner.png)
-
 ## Data Privacy, Meet Data Profitability
 
 PrivaSight is a decentralized platform that empowers users to monetize their personal data while maintaining complete privacy. By combining blockchain technology, privacy-preserving computation, and a token economy, PrivaSight creates a secure ecosystem where data owners can earn rewards while researchers and analysts gain valuable insights—all without exposing raw data.
