@@ -1,0 +1,1444 @@
+{
+  "version": "1.0.0",
+  "systemInfo": {
+    "name": "PrivaSight DataVault",
+    "deploymentId": "pv-01-prod-23891",
+    "lastUpdated": "2025-03-21T14:32:18Z",
+    "activeNodes": 5,
+    "totalStorage": "1.2TB",
+    "encryptionStandard": "AES-256-GCM",
+    "softwareVersion": "v2.3.1",
+    "lastBackup": "2025-03-20T03:00:00Z"
+  },
+  "users": [
+    {
+      "userId": "user-8a72b391",
+      "role": "DATA_OWNER",
+      "publicKey": "0x7aD4b762F07c1506361BcB200d80a987ED70F9E2",
+      "registeredDate": "2024-12-12T09:15:32Z",
+      "dataContributions": ["dataset-92845", "dataset-38721", "dataset-71934"],
+      "consentPreferences": {
+        "RESEARCH": true,
+        "MARKETING": false,
+        "HEALTH_STUDIES": true,
+        "COMMERCIAL": false
+      },
+      "privacyBudgets": {
+        "dataset-92845": {
+          "totalBudget": 10.0,
+          "remainingBudget": 7.3,
+          "lastReset": "2025-02-15T00:00:00Z"
+        },
+        "dataset-38721": {
+          "totalBudget": 5.0,
+          "remainingBudget": 4.2,
+          "lastReset": "2025-01-01T00:00:00Z"
+        },
+        "dataset-71934": {
+          "totalBudget": 8.0,
+          "remainingBudget": 8.0,
+          "lastReset": "2025-03-01T00:00:00Z"
+        }
+      },
+      "earnings": {
+        "totalTokens": 285.75,
+        "pendingTokens": 35.5,
+        "lastPayout": "2025-03-01T00:00:00Z",
+        "paymentAddress": "0x9B02Bf7D678Ae591Cb0D5EF29bD14A75BB06C3F3"
+      }
+    },
+    {
+      "userId": "user-3e51c728",
+      "role": "DATA_OWNER",
+      "publicKey": "0x3c9A8B66e7B6F4F8fD4b5F7a88BdD3F2c927DEf1",
+      "registeredDate": "2024-11-03T14:28:05Z",
+      "dataContributions": ["dataset-45632", "dataset-67290"],
+      "consentPreferences": {
+        "RESEARCH": true,
+        "MARKETING": true,
+        "HEALTH_STUDIES": true,
+        "COMMERCIAL": true
+      },
+      "privacyBudgets": {
+        "dataset-45632": {
+          "totalBudget": 12.0,
+          "remainingBudget": 5.7,
+          "lastReset": "2025-01-15T00:00:00Z"
+        },
+        "dataset-67290": {
+          "totalBudget": 7.0,
+          "remainingBudget": 2.1,
+          "lastReset": "2025-02-01T00:00:00Z"
+        }
+      },
+      "earnings": {
+        "totalTokens": 422.30,
+        "pendingTokens": 62.8,
+        "lastPayout": "2025-03-01T00:00:00Z",
+        "paymentAddress": "0x2F7E942F8C9a3F8D7B92bA65E4324839aC1d6297"
+      }
+    },
+    {
+      "userId": "user-5f19d842",
+      "role": "RESEARCHER",
+      "publicKey": "0x1B58D712fAE32DF4A91C4B58D2E31B3ED4b5D256",
+      "registeredDate": "2024-10-15T11:42:17Z",
+      "organization": "Medical Research Institute",
+      "researchCredentials": {
+        "credentialId": "MRI-29375",
+        "verifierUrl": "https://credentials.mri-global.org/verify",
+        "expirationDate": "2026-10-15T00:00:00Z",
+        "credentialHash": "0x3a7bd72c9b4f5e621d8872bb9f21c9637a98e2b2e5f7a8b9d3c2e1f0a9b8c7d6"
+      },
+      "accessedDatasets": ["dataset-92845", "dataset-45632", "dataset-67290"],
+      "tokensSpent": 485.25,
+      "paymentInfo": {
+        "accountId": "acct-3842910",
+        "billingAddress": {
+          "name": "Medical Research Institute",
+          "street": "123 Science Way",
+          "city": "Boston",
+          "state": "MA",
+          "postalCode": "02142",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "userId": "user-1b38a975",
+      "role": "RESEARCHER",
+      "publicKey": "0x4D7f892Ab1C5e3F8Ba6D9E4c72B3F1A9a7D6E5C4",
+      "registeredDate": "2025-01-21T16:38:12Z",
+      "organization": "Data Science Solutions, Inc.",
+      "researchCredentials": {
+        "credentialId": "DSS-78231",
+        "verifierUrl": "https://verify.datasciencesolutions.com",
+        "expirationDate": "2026-01-21T00:00:00Z",
+        "credentialHash": "0x8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6"
+      },
+      "accessedDatasets": ["dataset-38721", "dataset-71934"],
+      "tokensSpent": 215.50,
+      "paymentInfo": {
+        "accountId": "acct-9461723",
+        "billingAddress": {
+          "name": "Data Science Solutions, Inc.",
+          "street": "456 Tech Boulevard",
+          "city": "San Francisco",
+          "state": "CA",
+          "postalCode": "94105",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "userId": "user-2d84f729",
+      "role": "RESEARCHER",
+      "publicKey": "0x5E6f7A8b9C0d1E2f3A4b5C6d7E8f9A0b1C2d3E4f",
+      "registeredDate": "2025-02-01T12:00:00Z",
+      "organization": "University of Science",
+      "researchCredentials": {
+        "credentialId": "UOS-12345",
+        "verifierUrl": "https://verify.universityofscience.edu",
+        "expirationDate": "2027-02-01T00:00:00Z",
+        "credentialHash": "0x9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e"
+      },
+      "accessedDatasets": ["dataset-92845", "dataset-67290"],
+      "tokensSpent": 150.0,
+      "paymentInfo": {
+        "accountId": "acct-5678901",
+        "billingAddress": {
+          "name": "University of Science",
+          "street": "789 Academic Lane",
+          "city": "Cambridge",
+          "state": "MA",
+          "postalCode": "02139",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "userId": "user-7c42e619",
+      "role": "ADMIN",
+      "publicKey": "0x6B5a4C3d2E1f0A9b8C7d6E5f4A3b2C1D0",
+      "registeredDate": "2024-09-01T08:30:00Z",
+      "adminPrivileges": ["SYSTEM_CONFIG", "USER_MANAGEMENT", "AUDIT_ACCESS"],
+      "lastLogin": "2025-03-21T09:15:42Z",
+      "securityClearance": "LEVEL_3",
+      "twoFactorEnabled": true
+    }
+  ],
+  "datasets": [
+    {
+      "datasetId": "dataset-92845",
+      "name": "Anonymized Patient Health Records",
+      "ownerId": "user-8a72b391",
+      "createdDate": "2024-12-15T10:28:45Z",
+      "lastUpdated": "2025-01-18T14:32:10Z",
+      "size": "245MB",
+      "recordCount": 12834,
+      "dataHash": "0x2a7bd72c9b4f5e621d8872bb9f21c9637a98e2b2e5f7a8b9d3c2e1f0a9b8c7d6",
+      "encryptionDetails": {
+        "algorithm": "AES-256-GCM",
+        "keyId": "key-72935184",
+        "ivHash": "0x3c9d8b7a6f5e4d3c2b1a0f9e8d7c6b5a4"
+      },
+      "storageLocation": {
+        "mainStore": "ipfs://Qm7bd72c9b4f5e621d8872bb9f21c9637a98e2b2e5f7a8b9d3c2e1f0a9b8c7d6",
+        "backupStore": "s3://privasight-vault-backup/dataset-92845"
+      },
+      "nftDetails": {
+        "tokenId": "token-92845-0x71a3",
+        "contractAddress": "0x9B7bd72c9b4f5e621d8872bb9f21c9637a98e2b2",
+        "mintDate": "2024-12-15T11:35:22Z",
+        "chainId": 1,
+        "tokenURI": "https://metadata.privasight.io/tokens/92845"
+      },
+      "dataSchema": {
+        "fields": [
+          {"name": "patientId", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "age", "type": "integer", "sensitivity": "LOW"},
+          {"name": "gender", "type": "string", "sensitivity": "LOW"},
+          {"name": "zipCode", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "diagnosis", "type": "string", "sensitivity": "HIGH"},
+          {"name": "treatmentCode", "type": "string", "sensitivity": "HIGH"},
+          {"name": "bloodPressure", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "heartRate", "type": "integer", "sensitivity": "MEDIUM"},
+          {"name": "cholesterol", "type": "integer", "sensitivity": "MEDIUM"},
+          {"name": "smokingStatus", "type": "boolean", "sensitivity": "MEDIUM"}
+        ],
+        "sensitivityMetrics": {
+          "overallSensitivity": "HIGH",
+          "identifiabilityScore": 0.72,
+          "reidentificationRisk": "MEDIUM"
+        }
+      },
+      "privacySettings": {
+        "differentialPrivacy": {
+          "enabled": true,
+          "defaultEpsilon": 1.0,
+          "minEpsilon": 0.1,
+          "deltaValue": 1e-6,
+          "sensitiveAttributes": ["diagnosis", "treatmentCode"],
+          "noiseDistribution": "LAPLACE"
+        },
+        "accessControl": {
+          "allowedPurposes": ["MEDICAL_RESEARCH", "PUBLIC_HEALTH"],
+          "requiredCredentials": ["MEDICAL_RESEARCHER", "HEALTH_INSTITUTION"],
+          "minimumTrustScore": 0.8
+        },
+        "usageLimitation": {
+          "maxQueryPerDay": 10,
+          "budgetResetPeriod": "MONTHLY",
+          "requireApproval": true
+        }
+      },
+      "monetization": {
+        "pricePerQuery": 5.0,
+        "pricePerDataset": 100.0,
+        "discountForAcademic": 0.7,
+        "revenueShareOwner": 0.85,
+        "revenueSharePlatform": 0.15,
+        "minimumPayout": 10.0
+      },
+      "accessLog": [
+        {
+          "accessId": "access-67890",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-01-20T14:23:15Z",
+          "operation": "REGRESSION_ANALYSIS",
+          "epsilonUsed": 0.5,
+          "purpose": "MEDICAL_RESEARCH",
+          "approvalDate": "2025-01-20T09:12:33Z",
+          "queryAttributes": ["age", "gender", "diagnosis", "cholesterol"],
+          "paymentAmount": 25.0,
+          "resultHash": "0x5a4c3b2a1d0f9e8d7c6b5a4c3b2a1d0f9e8d7c6b"
+        },
+        {
+          "accessId": "access-67891",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-02-15T11:18:42Z",
+          "operation": "CLUSTERING_ANALYSIS",
+          "epsilonUsed": 1.2,
+          "purpose": "MEDICAL_RESEARCH",
+          "approvalDate": "2025-02-14T16:45:10Z",
+          "queryAttributes": ["age", "bloodPressure", "heartRate", "cholesterol"],
+          "paymentAmount": 30.0,
+          "resultHash": "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b"
+        },
+        {
+          "accessId": "access-67892",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-03-05T09:42:18Z",
+          "operation": "STATISTICS_COMPUTATION",
+          "epsilonUsed": 1.0,
+          "purpose": "PUBLIC_HEALTH",
+          "approvalDate": "2025-03-04T15:30:27Z",
+          "queryAttributes": ["age", "gender", "zipCode", "diagnosis"],
+          "paymentAmount": 20.0,
+          "resultHash": "0x9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b"
+        }
+      ]
+    },
+    {
+      "datasetId": "dataset-38721",
+      "name": "Financial Transaction Patterns",
+      "ownerId": "user-8a72b391",
+      "createdDate": "2025-01-05T13:42:18Z",
+      "lastUpdated": "2025-02-10T09:15:42Z",
+      "size": "158MB",
+      "recordCount": 38295,
+      "dataHash": "0x8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6",
+      "encryptionDetails": {
+        "algorithm": "AES-256-GCM",
+        "keyId": "key-38192745",
+        "ivHash": "0x7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a"
+      },
+      "storageLocation": {
+        "mainStore": "ipfs://Qm8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6",
+        "backupStore": "s3://privasight-vault-backup/dataset-38721"
+      },
+      "nftDetails": {
+        "tokenId": "token-38721-0x92b4",
+        "contractAddress": "0x9B7bd72c9b4f5e621d8872bb9f21c9637a98e2b2",
+        "mintDate": "2025-01-05T15:12:08Z",
+        "chainId": 1,
+        "tokenURI": "https://metadata.privasight.io/tokens/38721"
+      },
+      "dataSchema": {
+        "fields": [
+          {"name": "transactionId", "type": "string", "sensitivity": "LOW"},
+          {"name": "accountId", "type": "string", "sensitivity": "HIGH"},
+          {"name": "transactionDate", "type": "datetime", "sensitivity": "LOW"},
+          {"name": "amount", "type": "float", "sensitivity": "MEDIUM"},
+          {"name": "category", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "merchantId", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "merchantCategory", "type": "string", "sensitivity": "LOW"},
+          {"name": "fraudFlag", "type": "boolean", "sensitivity": "HIGH"},
+          {"name": "latitude", "type": "float", "sensitivity": "HIGH"},
+          {"name": "longitude", "type": "float", "sensitivity": "HIGH"}
+        ],
+        "sensitivityMetrics": {
+          "overallSensitivity": "HIGH",
+          "identifiabilityScore": 0.85,
+          "reidentificationRisk": "HIGH"
+        }
+      },
+      "privacySettings": {
+        "differentialPrivacy": {
+          "enabled": true,
+          "defaultEpsilon": 0.5,
+          "minEpsilon": 0.05,
+          "deltaValue": 1e-7,
+          "sensitiveAttributes": ["accountId", "fraudFlag", "latitude", "longitude"],
+          "noiseDistribution": "GAUSSIAN"
+        },
+        "accessControl": {
+          "allowedPurposes": ["FRAUD_DETECTION", "FINANCIAL_RESEARCH", "RISK_MODELING"],
+          "requiredCredentials": ["FINANCIAL_RESEARCHER", "FRAUD_ANALYST"],
+          "minimumTrustScore": 0.9
+        },
+        "usageLimitation": {
+          "maxQueryPerDay": 5,
+          "budgetResetPeriod": "QUARTERLY",
+          "requireApproval": true
+        }
+      },
+      "monetization": {
+        "pricePerQuery": 10.0,
+        "pricePerDataset": 200.0,
+        "discountForAcademic": 0.5,
+        "revenueShareOwner": 0.8,
+        "revenueSharePlatform": 0.2,
+        "minimumPayout": 20.0
+      },
+      "accessLog": [
+        {
+          "accessId": "access-45612",
+          "researcherId": "user-1b38a975",
+          "timestamp": "2025-02-18T10:32:45Z",
+          "operation": "FRAUD_DETECTION_MODEL",
+          "epsilonUsed": 0.3,
+          "purpose": "FRAUD_DETECTION",
+          "approvalDate": "2025-02-17T15:23:19Z",
+          "queryAttributes": ["transactionDate", "amount", "category", "merchantCategory", "fraudFlag"],
+          "paymentAmount": 35.0,
+          "resultHash": "0x7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8"
+        }
+      ]
+    },
+    {
+      "datasetId": "dataset-45632",
+      "name": "Customer Behavior Analytics",
+      "ownerId": "user-3e51c728",
+      "createdDate": "2024-11-12T08:15:32Z",
+      "lastUpdated": "2025-02-28T16:42:19Z",
+      "size": "325MB",
+      "recordCount": 52184,
+      "dataHash": "0x4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2",
+      "encryptionDetails": {
+        "algorithm": "AES-256-GCM",
+        "keyId": "key-56842913",
+        "ivHash": "0x1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e"
+      },
+      "storageLocation": {
+        "mainStore": "ipfs://Qm4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2",
+        "backupStore": "s3://privasight-vault-backup/dataset-45632"
+      },
+      "nftDetails": {
+        "tokenId": "token-45632-0x51c8",
+        "contractAddress": "0x9B7bd72c9b4f5e621d8872bb9f21c9637a98e2b2",
+        "mintDate": "2024-11-12T10:25:42Z",
+        "chainId": 1,
+        "tokenURI": "https://metadata.privasight.io/tokens/45632"
+      },
+      "dataSchema": {
+        "fields": [
+          {"name": "userId", "type": "string", "sensitivity": "HIGH"},
+          {"name": "sessionId", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "timestamp", "type": "datetime", "sensitivity": "LOW"},
+          {"name": "pageViewed", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "timeSpent", "type": "integer", "sensitivity": "LOW"},
+          {"name": "clickPattern", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "deviceType", "type": "string", "sensitivity": "LOW"},
+          {"name": "location", "type": "string", "sensitivity": "HIGH"},
+          {"name": "purchaseValue", "type": "float", "sensitivity": "MEDIUM"},
+          {"name": "customerSegment", "type": "string", "sensitivity": "MEDIUM"}
+        ],
+        "sensitivityMetrics": {
+          "overallSensitivity": "MEDIUM",
+          "identifiabilityScore": 0.68,
+          "reidentificationRisk": "MEDIUM"
+        }
+      },
+      "privacySettings": {
+        "differentialPrivacy": {
+          "enabled": true,
+          "defaultEpsilon": 2.0,
+          "minEpsilon": 0.2,
+          "deltaValue": 1e-5,
+          "sensitiveAttributes": ["userId", "location"],
+          "noiseDistribution": "LAPLACE"
+        },
+        "accessControl": {
+          "allowedPurposes": ["MARKETING_RESEARCH", "USER_EXPERIENCE", "PRODUCT_DEVELOPMENT"],
+          "requiredCredentials": ["MARKET_RESEARCHER", "UX_DESIGNER"],
+          "minimumTrustScore": 0.7
+        },
+        "usageLimitation": {
+          "maxQueryPerDay": 20,
+          "budgetResetPeriod": "WEEKLY",
+          "requireApproval": false
+        }
+      },
+      "monetization": {
+        "pricePerQuery": 3.0,
+        "pricePerDataset": 75.0,
+        "discountForAcademic": 0.6,
+        "revenueShareOwner": 0.75,
+        "revenueSharePlatform": 0.25,
+        "minimumPayout": 5.0
+      },
+      "accessLog": [
+        {
+          "accessId": "access-23451",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-01-15T13:42:18Z",
+          "operation": "PATTERN_ANALYSIS",
+          "epsilonUsed": 1.5,
+          "purpose": "USER_EXPERIENCE",
+          "approvalDate": null,
+          "queryAttributes": ["sessionId", "pageViewed", "timeSpent", "clickPattern", "deviceType"],
+          "paymentAmount": 15.0,
+          "resultHash": "0x3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e"
+        },
+        {
+          "accessId": "access-23452",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-02-08T09:18:25Z",
+          "operation": "SEGMENTATION_ANALYSIS",
+          "epsilonUsed": 2.0,
+          "purpose": "MARKETING_RESEARCH",
+          "approvalDate": null,
+          "queryAttributes": ["deviceType", "timeSpent", "purchaseValue", "customerSegment"],
+          "paymentAmount": 12.0,
+          "resultHash": "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e"
+        },
+        {
+          "accessId": "access-23453",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-03-12T15:32:47Z",
+          "operation": "REGRESSION_ANALYSIS",
+          "epsilonUsed": 1.8,
+          "purpose": "PRODUCT_DEVELOPMENT",
+          "approvalDate": null,
+          "queryAttributes": ["timeSpent", "clickPattern", "purchaseValue", "customerSegment"],
+          "paymentAmount": 15.0,
+          "resultHash": "0x5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e"
+        }
+      ]
+    },
+    {
+      "datasetId": "dataset-67290",
+      "name": "Genomic Research Data",
+      "ownerId": "user-3e51c728",
+      "createdDate": "2025-01-28T09:42:15Z",
+      "lastUpdated": "2025-02-15T11:18:23Z",
+      "size": "1.2GB",
+      "recordCount": 5280,
+      "dataHash": "0x7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a",
+      "encryptionDetails": {
+        "algorithm": "AES-256-GCM",
+        "keyId": "key-91284653",
+        "ivHash": "0x6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1"
+      },
+      "storageLocation": {
+        "mainStore": "ipfs://Qm7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a",
+        "backupStore": "s3://privasight-vault-backup/dataset-67290"
+      },
+      "nftDetails": {
+        "tokenId": "token-67290-0x38f2",
+        "contractAddress": "0x9B7bd72c9b4f5e621d8872bb9f21c9637a98e2b2",
+        "mintDate": "2025-01-28T11:05:32Z",
+        "chainId": 1,
+        "tokenURI": "https://metadata.privasight.io/tokens/67290"
+      },
+      "dataSchema": {
+        "fields": [
+          {"name": "sampleId", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "patientId", "type": "string", "sensitivity": "HIGH"},
+          {"name": "chromosomeRegion", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "geneMarker", "type": "string", "sensitivity": "MEDIUM"},
+          {"name": "snpVariant", "type": "string", "sensitivity": "HIGH"},
+          {"name": "phenotypeData", "type": "string", "sensitivity": "HIGH"},
+          {"name": "ethnicGroup", "type": "string", "sensitivity": "HIGH"},
+          {"name": "familyHistory", "type": "boolean", "sensitivity": "HIGH"},
+          {"name": "treatmentResponse", "type": "string", "sensitivity": "HIGH"},
+          {"name": "sideEffects", "type": "string", "sensitivity": "HIGH"}
+        ],
+        "sensitivityMetrics": {
+          "overallSensitivity": "VERY_HIGH",
+          "identifiabilityScore": 0.92,
+          "reidentificationRisk": "VERY_HIGH"
+        }
+      },
+      "privacySettings": {
+        "differentialPrivacy": {
+          "enabled": true,
+          "defaultEpsilon": 0.1,
+          "minEpsilon": 0.01,
+          "deltaValue": 1e-8,
+          "sensitiveAttributes": ["patientId", "snpVariant", "phenotypeData", "ethnicGroup", "familyHistory", "treatmentResponse", "sideEffects"],
+          "noiseDistribution": "GAUSSIAN"
+        },
+        "accessControl": {
+          "allowedPurposes": ["GENOMIC_RESEARCH", "CLINICAL_TRIAL", "TREATMENT_DEVELOPMENT"],
+          "requiredCredentials": ["GENOMIC_RESEARCHER", "CLINICAL_SCIENTIST", "BIOETHICS_APPROVAL"],
+          "minimumTrustScore": 0.95
+        },
+        "usageLimitation": {
+          "maxQueryPerDay": 3,
+          "budgetResetPeriod": "ANNUALLY",
+          "requireApproval": true
+        }
+      },
+      "monetization": {
+        "pricePerQuery": 50.0,
+        "pricePerDataset": 1000.0,
+        "discountForAcademic": 0.8,
+        "revenueShareOwner": 0.9,
+        "revenueSharePlatform": 0.1,
+        "minimumPayout": 100.0
+      },
+      "accessLog": [
+        {
+          "accessId": "access-78901",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-02-10T14:23:45Z",
+          "operation": "GENETIC_CORRELATION",
+          "epsilonUsed": 0.1,
+          "purpose": "GENOMIC_RESEARCH",
+          "approvalDate": "2025-02-08T09:15:32Z",
+          "queryAttributes": ["chromosomeRegion", "geneMarker", "snpVariant", "phenotypeData"],
+          "paymentAmount": 150.0,
+          "resultHash": "0x2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b"
+        },
+        {
+          "accessId": "access-78902",
+          "researcherId": "user-5f19d842",
+          "timestamp": "2025-03-05T11:42:18Z",
+          "operation": "TREATMENT_EFFICACY",
+          "epsilonUsed": 0.2,
+          "purpose": "TREATMENT_DEVELOPMENT",
+          "approvalDate": "2025-03-01T15:30:22Z",
+          "queryAttributes": ["geneMarker", "snpVariant", "treatmentResponse", "sideEffects"],
+          "paymentAmount": 200.0,
+          "resultHash": "0x1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a"
+        }
+      ]
+    },
+    {
+      "datasetId": "dataset-71934",
+      "name": "Environmental Sensor Network",
+      "ownerId": "user-8a72b391",
+      "createdDate": "2025-02-15T13:28:45Z",
+      "lastUpdated": "2025-03-15T09:12:35Z",
+      "size": "782MB",
+      "recordCount": 192845,
+      "dataHash": "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e",
+      "encryptionDetails": {
+        "algorithm": "AES-256-GCM",
+        "keyId": "key-47281935",
+        "ivHash": "0xf9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4"
+      },
+      "storageLocation": {
+        "mainStore": "ipfs://Qm9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e",
+        "backupStore": "s3://privasight-vault-backup/dataset-71934"
+      },
+      "nftDetails": {
+        "tokenId": "token-71934-0x72d5",
+        "contractAddress": "0x9B7bd72c9b4f5e621d8872bb9f21c9637a98e2b2",
+        "mintDate": "2025-02-15T15:10:28Z",
+        "chainId": 1,
+        "tokenURI": "https://metadata.privasight.io/tokens/71934"
+      },
+      "dataSchema": {
+        "fields": [
+          {"name": "sensorId", "type": "string", "sensitivity": "LOW"},
+          {"name": "timestamp", "type": "datetime", "sensitivity": "LOW"},
+          {"name": "latitude", "type": "float", "sensitivity": "MEDIUM"},
+          {"name": "longitude", "type": "float", "sensitivity": "MEDIUM"},
+          {"name": "temperature", "type": "float", "sensitivity": "LOW"},
+          {"name": "humidity", "type": "float", "sensitivity": "LOW"},
+          {"name": "airQuality", "type": "integer", "sensitivity": "LOW"},
+          {"name": "noiseLevel", "type": "float", "sensitivity": "LOW"},
+          {"name": "particleCount", "type": "integer", "sensitivity": "LOW"},
+          {"name": "batteryLevel", "type": "float", "sensitivity": "LOW"}
+        ],
+        "sensitivityMetrics": {
+          "overallSensitivity": "LOW",
+          "identifiabilityScore": 0.25,
+          "reidentificationRisk": "LOW"
+        }
+      },
+      "privacySettings": {
+        "differentialPrivacy": {
+          "enabled": true,
+          "defaultEpsilon": 5.0,
+          "minEpsilon": 1.0,
+          "deltaValue": 1e-4,
+          "sensitiveAttributes": ["latitude", "longitude"],
+          "noiseDistribution": "LAPLACE"
+        },
+        "accessControl": {
+          "allowedPurposes": ["ENVIRONMENTAL_RESEARCH", "URBAN_PLANNING", "CLIMATE_STUDIES"],
+          "requiredCredentials": ["ENVIRONMENTAL_SCIENTIST", "URBAN_PLANNER", "RESEARCH_INSTITUTION"],
+          "minimumTrustScore": 0.6
+        },
+        "usageLimitation": {
+          "maxQueryPerDay": 50,
+          "budgetResetPeriod": "DAILY",
+          "requireApproval": false
+        }
+      },
+      "monetization": {
+        "pricePerQuery": 1.0,
+        "pricePerDataset": 50.0,
+        "discountForAcademic": 0.9,
+        "revenueShareOwner": 0.7,
+        "revenueSharePlatform": 0.3,
+        "minimumPayout": 5.0
+      },
+      "accessLog": [
+        {
+          "accessId": "access-56123",
+          "researcherId": "user-1b38a975",
+          "timestamp": "2025-03-01T10:15:42Z",
+          "operation": "TIME_SERIES_ANALYSIS",
+          "epsilonUsed": 2.0,
+          "purpose": "ENVIRONMENTAL_RESEARCH",
+          "approvalDate": null,
+          "queryAttributes": ["timestamp", "temperature", "humidity", "airQuality", "particleCount"],
+          "paymentAmount": 5.0,
+          "resultHash": "0x8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e"
+        }
+      ]
+    }
+  ],
+  "computationJobs": [
+    {
+      "jobId": "job-56789",
+      "type": "REGRESSION",
+      "status": "COMPLETED",
+      "createdAt": "2025-01-20T14:23:15Z",
+      "startedAt": "2025-01-20T14:23:18Z",
+      "completedAt": "2025-01-20T14:25:42Z",
+      "requesterId": "user-5f19d842",
+      "datasetIds": ["dataset-92845"],
+      "accessId": "access-67890",
+      "configuration": {
+        "regressionType": "LINEAR",
+        "predictors": ["age", "gender", "cholesterol"],
+        "target": "diagnosis",
+        "hyperparameters": {
+          "regularization": "L2",
+          "alpha": 0.01,
+          "maxIterations": 1000
+        },
+        "privacyParams": {
+          "epsilon": 0.5,
+          "delta": 1e-6,
+          "noiseMechanism": "LAPLACE",
+          "gradientClipping": true,
+          "clippingThreshold": 1.0
+        }
+      },
+      "metrics": {
+        "accuracy": 0.82,
+        "precision": 0.79,
+        "recall": 0.81,
+        "f1Score": 0.80,
+        "auc": 0.85,
+        "mse": 0.15,
+        "privacyBudgetUsed": 0.5,
+        "executionTimeMs": 142500
+      },
+      "resultSummary": {
+        "coefficients": [
+          {"feature": "intercept", "value": 0.23, "significance": "HIGH"},
+          {"feature": "age", "value": 0.45, "significance": "HIGH"},
+          {"feature": "gender", "value": 0.12, "significance": "MEDIUM"},
+          {"feature": "cholesterol", "value": 0.38, "significance": "HIGH"}
+        ],
+        "modelQuality": "GOOD",
+        "privacyLevel": "HIGH",
+        "resultHash": "0x5a4c3b2a1d0f9e8d7c6b5a4c3b2a1d0f9e8d7c6b"
+      },
+      "logs": [
+        {"timestamp": "2025-01-20T14:23:18Z", "level": "INFO", "message": "Job started"},
+        {"timestamp": "2025-01-20T14:23:20Z", "level": "INFO", "message": "Loading data"},
+        {"timestamp": "2025-01-20T14:23:25Z", "level": "INFO", "message": "Applying differential privacy"},
+        {"timestamp": "2025-01-20T14:24:10Z", "level": "INFO", "message": "Training model"},
+        {"timestamp": "2025-01-20T14:25:30Z", "level": "INFO", "message": "Evaluating model"},
+        {"timestamp": "2025-01-20T14:25:42Z", "level": "INFO", "message": "Job completed successfully"}
+      ]
+    },
+    {
+      "jobId": "job-56790",
+      "type": "CLUSTERING",
+      "status": "COMPLETED",
+      "createdAt": "2025-02-15T11:18:42Z",
+      "startedAt": "2025-02-15T11:18:45Z",
+      "completedAt": "2025-02-15T11:23:12Z",
+      "requesterId": "user-5f19d842",
+      "datasetIds": ["dataset-92845"],
+      "accessId": "access-67891",
+      "configuration": {
+        "clusteringAlgorithm": "K_MEANS",
+        "features": ["age", "bloodPressure", "heartRate", "cholesterol"],
+        "hyperparameters": {
+          "k": 5,
+          "distanceMetric": "EUCLIDEAN",
+          "maxIterations": 300,
+          "randomSeed": 42
+        },
+        "privacyParams": {
+          "epsilon": 1.2,
+          "delta": 1e-6,
+          "noiseMechanism": "GAUSSIAN",
+          "featureClipping": true,
+          "clippingBounds": {
+            "age": [18, 95],
+            "bloodPressure": [80, 200],
+            "heartRate": [40, 180],
+            "cholesterol": [100, 300]
+          }
+        }
+      },
+      "metrics": {
+        "silhouetteScore": 0.68,
+        "daviesBouldinIndex": 0.72,
+        "calinski": 125.8,
+        "privacyBudgetUsed": 1.2,
+        "executionTimeMs": 267000
+      },
+      "resultSummary": {
+        "centroids": [
+          {"cluster": 1, "size": 3251, "features": {"age": 42.5, "bloodPressure": 125.3, "heartRate": 72.8, "cholesterol": 198.2}},
+          {"cluster": 2, "size": 2845, "features": {"age": 65.2, "bloodPressure": 145.7, "heartRate": 78.5, "cholesterol": 245.6}},
+          {"cluster": 3, "size": 2364, "features": {"age": 32.1, "bloodPressure": 118.4, "heartRate": 68.3, "cholesterol": 175.1}},
+          {"cluster": 4, "size": 2781, "features": {"age": 54.7, "bloodPressure": 138.2, "heartRate": 75.4, "cholesterol": 225.3}},
+          {"cluster": 5, "size": 1593, "features": {"age": 75.8, "bloodPressure": 152.6, "heartRate": 82.1, "cholesterol": 258.7}}
+        ],
+        "clusterQuality": "GOOD",
+        "privacyLevel": "MEDIUM",
+        "resultHash": "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b"
+      },
+      "logs": [
+        {"timestamp": "2025-02-15T11:18:45Z", "level": "INFO", "message": "Job started"},
+        {"timestamp": "2025-02-15T11:18:48Z", "level": "INFO", "message": "Loading data"},
+        {"timestamp": "2025-02-15T11:18:56Z", "level": "INFO", "message": "Applying differential privacy"},
+        {"timestamp": "2025-02-15T11:19:12Z", "level": "INFO", "message": "Initializing clusters"},
+        {"timestamp": "2025-02-15T11:20:45Z", "level": "INFO", "message": "Running K-means iterations"},
+        {"timestamp": "2025-02-15T11:22:38Z", "level": "INFO", "message": "Evaluating clusters"},
+        {"timestamp": "2025-02-15T11:23:12Z", "level": "INFO", "message": "Job completed successfully"}
+      ]
+    },
+    {
+      "jobId": "job-67123",
+      "type": "SMPC_SECURE_SUM",
+      "status": "COMPLETED",
+      "createdAt": "2025-03-15T09:12:35Z",
+      "startedAt": "2025-03-15T09:12:38Z",
+      "completedAt": "2025-03-15T09:13:05Z",
+      "requesterId": "user-5f19d842",
+      "datasetIds": ["dataset-92845", "dataset-38721", "dataset-45632"],
+      "accessId": "access-78903",
+      "configuration": {
+        "smpcType": "SECURE_SUM",
+        "participants": ["user-8a72b391", "user-3e51c728"],
+        "threshold": 2,
+        "enableDP": true,
+        "epsilon": 0.5,
+        "delta": 1e-6
+      },
+      "metrics": {
+        "executionTimeMs": 27000,
+        "privacyBudgetUsed": 0.5
+      },
+      "resultSummary": {
+        "sum": 1234.56,
+        "privacyMetrics": {
+          "epsilon": 0.5,
+          "delta": 1e-6,
+          "sensitivity": 10.0,
+          "noiseScale": 20.0
+        },
+        "resultHash": "0x4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b"
+      },
+      "logs": [
+        {"timestamp": "2025-03-15T09:12:38Z", "level": "INFO", "message": "SMPC job started"},
+        {"timestamp": "2025-03-15T09:12:40Z", "level": "INFO", "message": "Initializing secure sum protocol"},
+        {"timestamp": "2025-03-15T09:12:45Z", "level": "INFO", "message": "Collecting shares from participants"},
+        {"timestamp": "2025-03-15T09:13:00Z", "level": "INFO", "message": "Computing sum with differential privacy"},
+        {"timestamp": "2025-03-15T09:13:05Z", "level": "INFO", "message": "SMPC job completed successfully"}
+      ]
+    }
+  ],
+  "zkpVerifications": [
+    {
+      "verificationId": "zkp-12345",
+      "type": "RANGE_PROOF",
+      "status": "VERIFIED",
+      "createdAt": "2025-02-18T09:15:32Z",
+      "completedAt": "2025-02-18T09:15:35Z",
+      "proofHash": "0x4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b",
+      "requesterId": "user-5f19d842",
+      "datasetId": "dataset-92845",
+      "statement": {
+        "attribute": "age",
+        "rangeMin": 18,
+        "rangeMax": 65,
+        "verified": true
+      },
+      "blockchainReceipt": {
+        "transactionHash": "0x3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d",
+        "blockNumber": 19283745,
+        "timestamp": "2025-02-18T09:15:40Z"
+      }
+    },
+    {
+      "verificationId": "zkp-12346",
+      "type": "SET_MEMBERSHIP",
+      "status": "VERIFIED",
+      "createdAt": "2025-02-18T09:16:12Z",
+      "completedAt": "2025-02-18T09:16:15Z",
+      "proofHash": "0x1f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e",
+      "requesterId": "user-5f19d842",
+      "datasetId": "dataset-92845",
+      "statement": {
+        "attribute": "diagnosis",
+        "setValues": ["Type1", "Type2", "Type3", "Type4"],
+        "verified": true
+      },
+      "blockchainReceipt": {
+        "transactionHash": "0xf0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1",
+        "blockNumber": 19283746,
+        "timestamp": "2025-02-18T09:16:20Z"
+      }
+    },
+    {
+      "verificationId": "zkp-23456",
+      "type": "POLYNOMIAL_COMMITMENT",
+      "status": "VERIFIED",
+      "createdAt": "2025-03-05T14:28:32Z",
+      "completedAt": "2025-03-05T14:28:38Z",
+      "proofHash": "0x6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f",
+      "requesterId": "user-1b38a975",
+      "datasetId": "dataset-38721",
+      "statement": {
+        "polynomialDegree": 3,
+        "evaluationPoint": 4,
+        "evaluationResult": 125,
+        "verified": true
+      },
+      "blockchainReceipt": {
+        "transactionHash": "0xa9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0",
+        "blockNumber": 19312568,
+        "timestamp": "2025-03-05T14:28:45Z"
+      }
+    },
+    {
+      "verificationId": "zkp-34567",
+      "type": "PROOF_OF_KNOWLEDGE",
+      "status": "VERIFIED",
+      "createdAt": "2025-03-12T10:42:15Z",
+      "completedAt": "2025-03-12T10:42:28Z",
+      "proofHash": "0xb4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5",
+      "requesterId": "user-5f19d842",
+      "datasetId": "dataset-67290",
+      "statement": {
+        "knowledgeType": "DISCRETE_LOG",
+        "publicValues": ["g", "h"],
+        "verified": true
+      },
+      "blockchainReceipt": {
+        "transactionHash": "0x1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c",
+        "blockNumber": 19328745,
+        "timestamp": "2025-03-12T10:42:35Z"
+      }
+    }
+  ],
+  "smpcOperations": [
+    {
+      "operationId": "smpc-56789",
+      "type": "SECURE_SUM",
+      "status": "COMPLETED",
+      "createdAt": "2025-01-25T13:28:45Z",
+      "completedAt": "2025-01-25T13:29:12Z",
+      "participants": ["user-8a72b391", "user-3e51c728", "user-5f19d842"],
+      "coordinator": "node-coordinator-1",
+      "configuration": {
+        "threshold": 2,
+        "enableDP": true,
+        "epsilon": 1.0,
+        "delta": 1e-6
+      },
+      "result": {
+        "sum": 234.56,
+        "privacyMetrics": {
+          "epsilon": 1.0,
+          "delta": 1e-6,
+          "sensitivity": 10.0,
+          "noiseScale": 10.0
+        }
+      },
+      "blockchainReceipt": {
+        "transactionHash": "0x5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c",
+        "blockNumber": 19245678,
+        "timestamp": "2025-01-25T13:29:18Z"
+      }
+    },
+    {
+      "operationId": "smpc-56790",
+      "type": "SET_INTERSECTION",
+      "status": "COMPLETED",
+      "createdAt": "2025-02-10T09:15:32Z",
+      "completedAt": "2025-02-10T09:15:58Z",
+      "participants": ["user-8a72b391", "user-3e51c728"],
+      "coordinator": "node-coordinator-1",
+      "configuration": {
+        "setMaxSize": 1000,
+        "hashFunction": "SHA256",
+        "protocol": "PSI_CARDINALITY"
+      },
+      "result": {
+        "intersectionSize": 42,
+        "privacyMetrics": {
+          "leakage": "SIZE_ONLY"
+        }
+      },
+      "blockchainReceipt": {
+        "transactionHash": "0xc1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2",
+        "blockNumber": 19278945,
+        "timestamp": "2025-02-10T09:16:05Z"
+      }
+    },
+    {
+      "operationId": "smpc-67891",
+      "type": "SECURE_MATRIX_MULTIPLICATION",
+      "status": "COMPLETED",
+      "createdAt": "2025-03-01T14:32:18Z",
+      "completedAt": "2025-03-01T14:38:42Z",
+      "participants": ["user-8a72b391", "user-3e51c728", "user-5f19d842"],
+      "coordinator": "node-coordinator-2",
+      "configuration": {
+        "matrixDimensions": {"rowsA": 100, "colsA": 50, "colsB": 50},
+        "enableDP": true,
+        "epsilon": 0.5,
+        "delta": 1e-6
+      },
+      "result": {
+        "matrixHash": "0x2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b",
+        "privacyMetrics": {
+          "epsilon": 0.5,
+          "delta": 1e-6,
+          "sensitivity": 100.0,
+          "noiseScale": 200.0
+        }
+      },
+      "blockchainReceipt": {
+        "transactionHash": "0xe7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8",
+        "blockNumber": 19302145,
+        "timestamp": "2025-03-01T14:38:52Z"
+      }
+    }
+  ],
+  "privacyBudgets": [
+    {
+      "budgetId": "budget-92845",
+      "datasetId": "dataset-92845",
+      "ownerId": "user-8a72b391",
+      "totalBudget": 10.0,
+      "consumedBudget": 2.7,
+      "remainingBudget": 7.3,
+      "createdAt": "2024-12-15T10:28:45Z",
+      "lastReset": "2025-02-15T00:00:00Z",
+      "nextReset": "2025-03-15T00:00:00Z",
+      "resetPeriod": "MONTHLY",
+      "consumptionLog": [
+        {"timestamp": "2025-01-20T14:23:15Z", "operation": "REGRESSION_ANALYSIS", "consumed": 0.5, "remaining": 9.5},
+        {"timestamp": "2025-02-15T11:18:42Z", "operation": "CLUSTERING_ANALYSIS", "consumed": 1.2, "remaining": 8.3},
+        {"timestamp": "2025-03-05T09:42:18Z", "operation": "STATISTICS_COMPUTATION", "consumed": 1.0, "remaining": 7.3}
+      ]
+    },
+    {
+      "budgetId": "budget-38721",
+      "datasetId": "dataset-38721",
+      "ownerId": "user-8a72b391",
+      "totalBudget": 5.0,
+      "consumedBudget": 0.8,
+      "remainingBudget": 4.2,
+      "createdAt": "2025-01-05T13:42:18Z",
+      "lastReset": "2025-01-01T00:00:00Z",
+      "nextReset": "2025-04-01T00:00:00Z",
+      "resetPeriod": "QUARTERLY",
+      "consumptionLog": [
+        {"timestamp": "2025-02-18T10:32:45Z", "operation": "FRAUD_DETECTION_MODEL", "consumed": 0.3, "remaining": 4.7},
+        {"timestamp": "2025-03-15T09:12:35Z", "operation": "SECURE_SUM", "consumed": 0.5, "remaining": 4.2}
+      ]
+    },
+    {
+      "budgetId": "budget-71934",
+      "datasetId": "dataset-71934",
+      "ownerId": "user-8a72b391",
+      "totalBudget": 8.0,
+      "consumedBudget": 2.0,
+      "remainingBudget": 6.0,
+      "createdAt": "2025-02-15T13:28:45Z",
+      "lastReset": "2025-03-01T00:00:00Z",
+      "nextReset": "2025-04-01T00:00:00Z",
+      "resetPeriod": "MONTHLY",
+      "consumptionLog": [
+        {"timestamp": "2025-03-01T10:15:42Z", "operation": "TIME_SERIES_ANALYSIS", "consumed": 2.0, "remaining": 6.0}
+      ]
+    }
+  ],
+  "auditLogs": [
+    {
+      "logId": "log-123456",
+      "timestamp": "2025-01-20T14:23:15Z",
+      "userId": "user-5f19d842",
+      "action": "DATASET_ACCESS",
+      "datasetId": "dataset-92845",
+      "details": {
+        "accessId": "access-67890",
+        "operation": "REGRESSION_ANALYSIS",
+        "epsilonUsed": 0.5,
+        "ipAddress": "192.168.1.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "logId": "log-123457",
+      "timestamp": "2025-01-25T13:28:45Z",
+      "userId": "user-5f19d842",
+      "action": "SMPC_OPERATION",
+      "details": {
+        "operationId": "smpc-56789",
+        "operationType": "SECURE_SUM",
+        "participants": ["user-8a72b391", "user-3e51c728", "user-5f19d842"],
+        "ipAddress": "192.168.1.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "logId": "log-123458",
+      "timestamp": "2025-02-15T11:18:42Z",
+      "userId": "user-5f19d842",
+      "action": "DATASET_ACCESS",
+      "datasetId": "dataset-92845",
+      "details": {
+        "accessId": "access-67891",
+        "operation": "CLUSTERING_ANALYSIS",
+        "epsilonUsed": 1.2,
+        "ipAddress": "192.168.1.2",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "logId": "log-123459",
+      "timestamp": "2025-02-18T09:15:32Z",
+      "userId": "user-5f19d842",
+      "action": "ZKP_VERIFICATION",
+      "details": {
+        "verificationId": "zkp-12345",
+        "verificationType": "RANGE_PROOF",
+        "attribute": "age",
+        "ipAddress": "192.168.1.2",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "logId": "log-123460",
+      "timestamp": "2025-03-01T14:32:18Z",
+      "userId": "user-5f19d842",
+      "action": "SMPC_OPERATION",
+      "details": {
+        "operationId": "smpc-67891",
+        "operationType": "SECURE_MATRIX_MULTIPLICATION",
+        "participants": ["user-8a72b391", "user-3e51c728", "user-5f19d842"],
+        "ipAddress": "192.168.1.3",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "logId": "log-123461",
+      "timestamp": "2025-03-15T09:12:35Z",
+      "userId": "user-5f19d842",
+      "action": "SMPC_OPERATION",
+      "details": {
+        "operationId": "job-67123",
+        "operationType": "SECURE_SUM",
+        "participants": ["user-8a72b391", "user-3e51c728"],
+        "ipAddress": "192.168.2.1",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "logId": "log-123462",
+      "timestamp": "2025-03-20T11:25:42Z",
+      "userId": "user-2d84f729",
+      "action": "DATASET_ACCESS",
+      "datasetId": "dataset-67290",
+      "details": {
+        "accessId": "access-78904",
+        "operation": "GENETIC_CORRELATION",
+        "epsilonUsed": 0.2,
+        "purpose": "GENOMIC_RESEARCH",
+        "approvalDate": null,
+        "queryAttributes": ["chromosomeRegion", "geneMarker", "snpVariant", "phenotypeData"],
+        "paymentAmount": 150.0,
+        "resultHash": null
+      },
+      "status": "FAILED",
+      "error": "Insufficient privacy budget"
+    }
+  ],
+  "accessPolicies": [
+    {
+      "policyId": "policy-health-data",
+      "name": "Health Data Access Policy",
+      "description": "Policy governing access to health-related datasets",
+      "appliesTo": ["dataset-92845"],
+      "createdAt": "2024-12-15T11:00:00Z",
+      "updatedAt": "2025-01-15T09:30:15Z",
+      "rules": [
+        {
+          "ruleId": "rule-health-1",
+          "attribute": "purpose",
+          "condition": "IN",
+          "values": ["MEDICAL_RESEARCH", "PUBLIC_HEALTH", "CLINICAL_TRIAL"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-health-2",
+          "attribute": "credentials",
+          "condition": "INCLUDES_ANY",
+          "values": ["MEDICAL_RESEARCHER", "HEALTH_INSTITUTION", "IRB_APPROVAL"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-health-3",
+          "attribute": "epsilon",
+          "condition": "GREATER_EQUAL",
+          "values": [0.1],
+          "required": true
+        },
+        {
+          "ruleId": "rule-health-4",
+          "attribute": "epsilon",
+          "condition": "LESS_EQUAL",
+          "values": [2.0],
+          "required": true
+        }
+      ],
+      "authorizedRoles": ["RESEARCHER", "MEDICAL_PROFESSIONAL"],
+      "requiresOwnerApproval": true,
+      "privacyRequirements": {
+        "minimumDP": true,
+        "epsilonRange": [0.1, 2.0],
+        "deltaMax": 1e-6,
+        "ownerNotification": true
+      }
+    },
+    {
+      "policyId": "policy-financial-data",
+      "name": "Financial Data Access Policy",
+      "description": "Policy governing access to financial transaction datasets",
+      "appliesTo": ["dataset-38721"],
+      "createdAt": "2025-01-05T14:00:00Z",
+      "updatedAt": "2025-01-05T14:00:00Z",
+      "rules": [
+        {
+          "ruleId": "rule-financial-1",
+          "attribute": "purpose",
+          "condition": "IN",
+          "values": ["FRAUD_DETECTION", "FINANCIAL_RESEARCH", "RISK_MODELING"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-financial-2",
+          "attribute": "credentials",
+          "condition": "INCLUDES_ANY",
+          "values": ["FINANCIAL_RESEARCHER", "FRAUD_ANALYST", "BANKING_INSTITUTION"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-financial-3",
+          "attribute": "epsilon",
+          "condition": "GREATER_EQUAL",
+          "values": [0.05],
+          "required": true
+        },
+        {
+          "ruleId": "rule-financial-4",
+          "attribute": "epsilon",
+          "condition": "LESS_EQUAL",
+          "values": [1.0],
+          "required": true
+        }
+      ],
+      "authorizedRoles": ["RESEARCHER", "FINANCIAL_ANALYST"],
+      "requiresOwnerApproval": true,
+      "privacyRequirements": {
+        "minimumDP": true,
+        "epsilonRange": [0.05, 1.0],
+        "deltaMax": 1e-7,
+        "ownerNotification": true
+      }
+    },
+    {
+      "policyId": "policy-user-data",
+      "name": "User Behavior Data Access Policy",
+      "description": "Policy governing access to user behavior datasets",
+      "appliesTo": ["dataset-45632"],
+      "createdAt": "2024-11-12T09:00:00Z",
+      "updatedAt": "2024-12-05T15:45:22Z",
+      "rules": [
+        {
+          "ruleId": "rule-user-1",
+          "attribute": "purpose",
+          "condition": "IN",
+          "values": ["MARKETING_RESEARCH", "USER_EXPERIENCE", "PRODUCT_DEVELOPMENT"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-user-2",
+          "attribute": "credentials",
+          "condition": "INCLUDES_ANY",
+          "values": ["MARKET_RESEARCHER", "UX_DESIGNER", "PRODUCT_MANAGER"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-user-3",
+          "attribute": "epsilon",
+          "condition": "GREATER_EQUAL",
+          "values": [0.2],
+          "required": true
+        },
+        {
+          "ruleId": "rule-user-4",
+          "attribute": "epsilon",
+          "condition": "LESS_EQUAL",
+          "values": [5.0],
+          "required": true
+        }
+      ],
+      "authorizedRoles": ["RESEARCHER", "PRODUCT_MANAGER", "UX_DESIGNER"],
+      "requiresOwnerApproval": false,
+      "privacyRequirements": {
+        "minimumDP": true,
+        "epsilonRange": [0.2, 5.0],
+        "deltaMax": 1e-5,
+        "ownerNotification": false
+      }
+    },
+    {
+      "policyId": "policy-genomic-data",
+      "name": "Genomic Data Access Policy",
+      "description": "Policy governing access to genomic research datasets",
+      "appliesTo": ["dataset-67290"],
+      "createdAt": "2025-01-28T10:00:00Z",
+      "updatedAt": "2025-01-28T10:00:00Z",
+      "rules": [
+        {
+          "ruleId": "rule-genomic-1",
+          "attribute": "purpose",
+          "condition": "IN",
+          "values": ["GENOMIC_RESEARCH", "CLINICAL_TRIAL", "TREATMENT_DEVELOPMENT"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-genomic-2",
+          "attribute": "credentials",
+          "condition": "INCLUDES_ANY",
+          "values": ["GENOMIC_RESEARCHER", "CLINICAL_SCIENTIST", "BIOETHICS_APPROVAL"],
+          "required": true
+        },
+        {
+          "ruleId": "rule-genomic-3",
+          "attribute": "epsilon",
+          "condition": "GREATER_EQUAL",
+          "values": [0.01],
+          "required": true
+        },
+        {
+          "ruleId": "rule-genomic-4",
+          "attribute": "epsilon",
+          "condition": "LESS_EQUAL",
+          "values": [0.5],
+          "required": true
+        }
+      ],
+      "authorizedRoles": ["RESEARCHER", "CLINICAL_SCIENTIST"],
+      "requiresOwnerApproval": true,
+      "privacyRequirements": {
+        "minimumDP": true,
+        "epsilonRange": [0.01, 0.5],
+        "deltaMax": 1e-8,
+        "ownerNotification": true
+      }
+    }
+  ],
+  "pricingPlans": [
+    {
+      "planId": "plan-standard",
+      "name": "Standard Research Plan",
+      "description": "Standard pricing for academic and non-profit researchers",
+      "pricePerQuery": 5.0,
+      "pricePerDataset": 100.0,
+      "monthlySubscription": 500.0,
+      "maxQueriesPerDay": 50,
+      "maxEpsilonPerDay": 10.0,
+      "discounts": {
+        "academic": 0.7,
+        "nonprofit": 0.5,
+        "governmentAgency": 0.3,
+        "startups": 0.2
+      },
+      "features": {
+        "supportedAlgorithms": ["REGRESSION", "CLUSTERING", "STATISTICS"],
+        "priorityProcessing": false,
+        "customAlgorithms": false,
+        "batchProcessing": false
+      }
+    },
+    {
+      "planId": "plan-premium",
+      "name": "Premium Research Plan",
+      "description": "Advanced plan for professional researchers with higher demands",
+      "pricePerQuery": 10.0,
+      "pricePerDataset": 200.0,
+      "monthlySubscription": 2000.0,
+      "maxQueriesPerDay": 200,
+      "maxEpsilonPerDay": 25.0,
+      "discounts": {
+        "academic": 0.5,
+        "nonprofit": 0.3,
+        "governmentAgency": 0.2,
+        "startups": 0.1
+      },
+      "features": {
+        "supportedAlgorithms": ["REGRESSION", "CLUSTERING", "STATISTICS", "FEDERATED_LEARNING", "NEURAL_NETWORKS"],
+        "priorityProcessing": true,
+        "customAlgorithms": true,
+        "batchProcessing": true
+      }
+    },
+    {
+      "planId": "plan-enterprise",
+      "name": "Enterprise Research Plan",
+      "description": "Comprehensive plan for large organizations and research institutions",
+      "pricePerQuery": null,
+      "pricePerDataset": null,
+      "monthlySubscription": 10000.0,
+      "maxQueriesPerDay": null,
+      "maxEpsilonPerDay": 100.0,
+      "discounts": {
+        "volumeDiscount": true,
+        "annualCommitment": 0.15
+      },
+      "features": {
+        "supportedAlgorithms": ["ALL"],
+        "priorityProcessing": true,
+        "customAlgorithms": true,
+        "batchProcessing": true,
+        "dedicatedSupport": true,
+        "customPrivacySettings": true,
+        "privateDeployment": true
+      }
+    }
+  ],
+  "systemMetrics": {
+    "lastUpdated": "2025-03-21T14:32:18Z",
+    "uptime": "99.98%",
+    "totalUsers": 387,
+    "activeUsers": 142,
+    "totalDatasets": 58,
+    "totalStorage": "15.7TB",
+    "totalQueries": 28457,
+    "averageQueryTime": 2.8,
+    "privacyMetrics": {
+      "averageEpsilonUsed": 0.82,
+      "totalPrivacyBudgetUsed": 427.5,
+      "privacyViolationAttempts": 3,
+      "successfulDefenses": 3
+    },
+    "performanceStats": {
+      "cpuUtilization": 0.42,
+      "memoryUtilization": 0.65,
+      "diskUtilization": 0.38,
+      "networkBandwidth": "450Mbps",
+      "activeJobs": 12,
+      "jobQueue": 5
+    },
+    "blockchainStats": {
+      "totalTransactions": 42851,
+      "averageBlockTime": 12.3,
+      "activeSmartContracts": 3,
+      "gasUsed": 4852163541
+    },
+    "financialMetrics": {
+      "totalRevenue": 285423.75,
+      "dataOwnerPayouts": 228339.00,
+      "platformFees": 57084.75,
+      "pendingPayments": 12584.50
+    }
+  }
+}
