@@ -1,0 +1,1292 @@
+{
+  "version": "2.0.0",
+  "lastUpdated": "2025-03-21T10:15:42Z",
+  "globalSettings": {
+    "defaultDenyPolicy": true,
+    "enforceStrictValidation": true,
+    "requireExplicitRules": true,
+    "maxConcurrentAccess": 10,
+    "defaultTimeoutMinutes": 30,
+    "enforceMFA": {
+      "forSensitiveOperations": true,
+      "forAdminOperations": true,
+      "forDatasetAccess": {
+        "highSensitivity": true,
+        "mediumSensitivity": true,
+        "lowSensitivity": false
+      }
+    },
+    "auditSettings": {
+      "logAllAccess": true,
+      "logAllDenials": true,
+      "retentionPeriodDays": 365,
+      "alertOnSuspiciousActivity": true
+    }
+  },
+  "roles": [
+    {
+      "roleId": "ADMIN",
+      "name": "System Administrator",
+      "description": "Full administrative access to all system components",
+      "permissions": [
+        "SYSTEM_CONFIG",
+        "USER_MANAGEMENT",
+        "DATASET_MANAGEMENT",
+        "BUDGET_MANAGEMENT",
+        "RULE_MANAGEMENT",
+        "POLICY_MANAGEMENT",
+        "AUDIT_ACCESS",
+        "CREDENTIAL_MANAGEMENT",
+        "BILLING_MANAGEMENT"
+      ],
+      "restrictions": {
+        "requiresApproval": ["RULE_MANAGEMENT", "POLICY_MANAGEMENT"],
+        "forbiddenOperations": []
+      }
+    },
+    {
+      "roleId": "DATA_OWNER",
+      "name": "Data Owner",
+      "description": "Owns and manages datasets",
+      "permissions": [
+        "DATASET_UPLOAD",
+        "DATASET_UPDATE",
+        "DATASET_DELETE",
+        "CONTROL_DATASET_ACCESS",
+        "VIEW_ACCESS_LOGS",
+        "MANAGE_DATASET_SETTINGS",
+        "SET_PRIVACY_BUDGET",
+        "RECEIVE_PAYMENTS"
+      ],
+      "restrictions": {
+        "requiresApproval": ["DATASET_DELETE"],
+        "forbiddenOperations": ["SYSTEM_CONFIG", "USER_MANAGEMENT"]
+      }
+    },
+    {
+      "roleId": "RESEARCHER",
+      "name": "Data Researcher",
+      "description": "Accesses and analyzes datasets with privacy constraints",
+      "permissions": [
+        "REQUEST_DATASET_ACCESS",
+        "RUN_ANALYSIS",
+        "VIEW_RESULTS",
+        "PAY_FOR_ACCESS",
+        "PUBLISH_RESULTS",
+        "VIEW_OWN_ACTIVITY"
+      ],
+      "restrictions": {
+        "requiresApproval": ["RUN_ANALYSIS"],
+        "forbiddenOperations": ["DATASET_MANAGEMENT", "SYSTEM_CONFIG"]
+      }
+    },
+    {
+      "roleId": "MEDICAL_RESEARCHER",
+      "name": "Medical Researcher",
+      "description": "Specialized researcher role for medical data",
+      "inheritFrom": "RESEARCHER",
+      "additionalPermissions": [
+        "ACCESS_MEDICAL_DATA",
+        "RUN_MEDICAL_ANALYSIS"
+      ],
+      "certificationRequired": {
+        "type": "MEDICAL_CERTIFICATION",
+        "validationEndpoint": "https://certifications.privasight.io/validate/medical",
+        "renewalPeriodDays": 365
+      }
+    },
+    {
+      "roleId": "FINANCIAL_ANALYST",
+      "name": "Financial Analyst",
+      "description": "Specialized researcher role for financial data",
+      "inheritFrom": "RESEARCHER",
+      "additionalPermissions": [
+        "ACCESS_FINANCIAL_DATA",
+        "RUN_FINANCIAL_ANALYSIS"
+      ],
+      "certificationRequired": {
+        "type": "FINANCIAL_CERTIFICATION",
+        "validationEndpoint": "https://certifications.privasight.io/validate/financial",
+        "renewalPeriodDays": 180
+      }
+    },
+    {
+      "roleId": "AUDITOR",
+      "name": "System Auditor",
+      "description": "Monitors system for compliance and security",
+      "permissions": [
+        "VIEW_AUDIT_LOGS",
+        "VIEW_SYSTEM_METRICS",
+        "VIEW_ACCESS_LOGS",
+        "RUN_COMPLIANCE_REPORTS",
+        "VIEW_PRIVACY_BUDGETS"
+      ],
+      "restrictions": {
+        "requiresApproval": [],
+        "forbiddenOperations": [
+          "DATASET_MANAGEMENT",
+          "USER_MANAGEMENT",
+          "SYSTEM_CONFIG",
+          "ACCESS_RAW_DATA"
+        ]
+      }
+    }
+  ],
+  "sensitivityLevels": [
+    {
+      "levelId": "LOW",
+      "name": "Low Sensitivity",
+      "description": "Non-sensitive data with minimal privacy concerns",
+      "defaultEpsilon": 5.0,
+      "defaultDelta": 1e-4,
+      "minEpsilon": 1.0,
+      "accessRequirements": {
+        "approvalRequired": false,
+        "loggingRequired": true,
+        "mfaRequired": false,
+        "zkpVerificationRequired": false
+      }
+    },
+    {
+      "levelId": "MEDIUM",
+      "name": "Medium Sensitivity",
+      "description": "Moderately sensitive data requiring privacy protections",
+      "defaultEpsilon": 1.0,
+      "defaultDelta": 1e-5,
+      "minEpsilon": 0.1,
+      "accessRequirements": {
+        "approvalRequired": false,
+        "loggingRequired": true,
+        "mfaRequired": false,
+        "zkpVerificationRequired": false
+      }
+    },
+    {
+      "levelId": "HIGH",
+      "name": "High Sensitivity",
+      "description": "Highly sensitive data requiring strong privacy protections",
+      "defaultEpsilon": 0.5,
+      "defaultDelta": 1e-6,
+      "minEpsilon": 0.05,
+      "accessRequirements": {
+        "approvalRequired": true,
+        "loggingRequired": true,
+        "mfaRequired": true,
+        "zkpVerificationRequired": true
+      }
+    },
+    {
+      "levelId": "VERY_HIGH",
+      "name": "Very High Sensitivity",
+      "description": "Extremely sensitive data requiring maximum privacy protections",
+      "defaultEpsilon": 0.1,
+      "defaultDelta": 1e-7,
+      "minEpsilon": 0.01,
+      "accessRequirements": {
+        "approvalRequired": true,
+        "loggingRequired": true,
+        "mfaRequired": true,
+        "zkpVerificationRequired": true,
+        "multiPartyApprovalRequired": true,
+        "secureComputationRequired": true
+      }
+    }
+  ],
+  "purposeCategories": [
+    {
+      "categoryId": "SCIENTIFIC_RESEARCH",
+      "name": "Scientific Research",
+      "description": "Academic and scientific research purposes",
+      "allowedRoles": ["RESEARCHER", "MEDICAL_RESEARCHER"],
+      "requiredCredentials": ["ACADEMIC_INSTITUTION", "RESEARCH_GRANT"],
+      "defaultSensitivityAccess": ["LOW", "MEDIUM"],
+      "epsilonMultiplier": 1.0
+    },
+    {
+      "categoryId": "MEDICAL_RESEARCH",
+      "name": "Medical Research",
+      "description": "Medical and healthcare research purposes",
+      "allowedRoles": ["MEDICAL_RESEARCHER"],
+      "requiredCredentials": ["MEDICAL_CERTIFICATION", "IRB_APPROVAL"],
+      "defaultSensitivityAccess": ["LOW", "MEDIUM", "HIGH"],
+      "epsilonMultiplier": 0.8
+    },
+    {
+      "categoryId": "PUBLIC_HEALTH",
+      "name": "Public Health",
+      "description": "Public health initiatives and disease monitoring",
+      "allowedRoles": ["MEDICAL_RESEARCHER", "RESEARCHER"],
+      "requiredCredentials": ["PUBLIC_HEALTH_AGENCY", "MEDICAL_CERTIFICATION"],
+      "defaultSensitivityAccess": ["LOW", "MEDIUM", "HIGH"],
+      "epsilonMultiplier": 0.7
+    },
+    {
+      "categoryId": "CLINICAL_TRIAL",
+      "name": "Clinical Trial",
+      "description": "Clinical trial research and development",
+      "allowedRoles": ["MEDICAL_RESEARCHER"],
+      "requiredCredentials": ["MEDICAL_CERTIFICATION", "IRB_APPROVAL", "CLINICAL_TRIAL_ID"],
+      "defaultSensitivityAccess": ["LOW", "MEDIUM", "HIGH", "VERY_HIGH"],
+      "epsilonMultiplier": 0.5
+    },
+    {
+      "categoryId": "FRAUD_DETECTION",
+      "name": "Fraud Detection",
+      "description": "Financial fraud detection and prevention",
+      "allowedRoles": ["FINANCIAL_ANALYST", "RESEARCHER"],
+      "requiredCredentials": ["FINANCIAL_CERTIFICATION", "FRAUD_ANALYSIS_CERTIFICATION"],
+      "defaultSensitivityAccess": ["LOW", "MEDIUM", "HIGH"],
+      "epsilonMultiplier": 0.8
+    },
+    {
+      "categoryId": "MARKETING_RESEARCH",
+      "name": "Marketing Research",
+      "description": "Consumer behavior and marketing analysis",
+      "allowedRoles": ["RESEARCHER"],
+      "requiredCredentials": ["MARKETING_CERTIFICATION"],
+      "defaultSensitivityAccess": ["LOW", "MEDIUM"],
+      "epsilonMultiplier": 1.2
+    },
+    {
+      "categoryId": "PRODUCT_DEVELOPMENT",
+      "name": "Product Development",
+      "description": "Product and service development and optimization",
+      "allowedRoles": ["RESEARCHER"],
+      "requiredCredentials": [],
+      "defaultSensitivityAccess": ["LOW", "MEDIUM"],
+      "epsilonMultiplier": 1.5
+    },
+    {
+      "categoryId": "ACADEMIC_EDUCATION",
+      "name": "Academic Education",
+      "description": "Educational purposes in academic settings",
+      "allowedRoles": ["RESEARCHER", "MEDICAL_RESEARCHER"],
+      "requiredCredentials": ["ACADEMIC_INSTITUTION"],
+      "defaultSensitivityAccess": ["LOW"],
+      "epsilonMultiplier": 2.0
+    }
+  ],
+  "accessRules": [
+    {
+      "ruleId": "rule-medical-data",
+      "name": "Medical Data Access Rule",
+      "description": "Rules governing access to medical and health datasets",
+      "appliesTo": {
+        "dataCategories": ["HEALTH_DATA", "MEDICAL_RECORDS", "GENOMIC_DATA"],
+        "sensitivityLevels": ["HIGH", "VERY_HIGH"]
+      },
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "IN",
+          "values": ["MEDICAL_RESEARCH", "PUBLIC_HEALTH", "CLINICAL_TRIAL"]
+        },
+        {
+          "attribute": "credentials",
+          "operator": "INCLUDES_ANY",
+          "values": ["MEDICAL_CERTIFICATION", "IRB_APPROVAL"]
+        },
+        {
+          "attribute": "role",
+          "operator": "EQUALS",
+          "values": ["MEDICAL_RESEARCHER"]
+        },
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.85]
+        }
+      ],
+      "privacyRequirements": {
+        "minEpsilon": 0.1,
+        "maxEpsilon": 1.0,
+        "minDelta": 1e-8,
+        "maxDelta": 1e-6,
+        "requireDifferentialPrivacy": true,
+        "noiseDistribution": "GAUSSIAN"
+      },
+      "timeRestrictions": {
+        "maxSessionDuration": 8,
+        "allowedTimeWindows": [
+          {
+            "startTime": "08:00:00",
+            "endTime": "20:00:00",
+            "timezone": "UTC",
+            "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
+          }
+        ]
+      },
+      "approvalWorkflow": {
+        "requireDataOwnerApproval": true,
+        "requireAdminApproval": false,
+        "autoExpireAfterDays": 30,
+        "maxApprovalTimeHours": 48
+      }
+    },
+    {
+      "ruleId": "rule-financial-data",
+      "name": "Financial Data Access Rule",
+      "description": "Rules governing access to financial and transaction datasets",
+      "appliesTo": {
+        "dataCategories": ["FINANCIAL_DATA", "TRANSACTION_DATA", "PAYMENT_DATA"],
+        "sensitivityLevels": ["HIGH"]
+      },
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "IN",
+          "values": ["FRAUD_DETECTION", "FINANCIAL_RESEARCH", "RISK_MODELING"]
+        },
+        {
+          "attribute": "credentials",
+          "operator": "INCLUDES_ANY",
+          "values": ["FINANCIAL_CERTIFICATION", "FRAUD_ANALYSIS_CERTIFICATION"]
+        },
+        {
+          "attribute": "role",
+          "operator": "EQUALS",
+          "values": ["FINANCIAL_ANALYST"]
+        },
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.9]
+        }
+      ],
+      "privacyRequirements": {
+        "minEpsilon": 0.05,
+        "maxEpsilon": 0.5,
+        "minDelta": 1e-8,
+        "maxDelta": 1e-6,
+        "requireDifferentialPrivacy": true,
+        "noiseDistribution": "GAUSSIAN",
+        "requireSecureMPC": true
+      },
+      "timeRestrictions": {
+        "maxSessionDuration": 4,
+        "allowedTimeWindows": [
+          {
+            "startTime": "09:00:00",
+            "endTime": "17:00:00",
+            "timezone": "UTC",
+            "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
+          }
+        ]
+      },
+      "approvalWorkflow": {
+        "requireDataOwnerApproval": true,
+        "requireAdminApproval": true,
+        "autoExpireAfterDays": 7,
+        "maxApprovalTimeHours": 24
+      }
+    },
+    {
+      "ruleId": "rule-user-behavior",
+      "name": "User Behavior Data Access Rule",
+      "description": "Rules governing access to user behavior and analytics datasets",
+      "appliesTo": {
+        "dataCategories": ["USER_BEHAVIOR", "CLICKSTREAM_DATA", "ANALYTICS_DATA"],
+        "sensitivityLevels": ["MEDIUM"]
+      },
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "IN",
+          "values": ["MARKETING_RESEARCH", "PRODUCT_DEVELOPMENT", "USER_EXPERIENCE"]
+        },
+        {
+          "attribute": "credentials",
+          "operator": "INCLUDES_ANY",
+          "values": ["MARKETING_CERTIFICATION", "UX_CERTIFICATION"]
+        },
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.7]
+        }
+      ],
+      "privacyRequirements": {
+        "minEpsilon": 0.2,
+        "maxEpsilon": 2.0,
+        "minDelta": 1e-6,
+        "maxDelta": 1e-4,
+        "requireDifferentialPrivacy": true,
+        "noiseDistribution": "LAPLACE"
+      },
+      "timeRestrictions": {
+        "maxSessionDuration": 12,
+        "allowedTimeWindows": [
+          {
+            "startTime": "00:00:00",
+            "endTime": "23:59:59",
+            "timezone": "UTC",
+            "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+          }
+        ]
+      },
+      "approvalWorkflow": {
+        "requireDataOwnerApproval": false,
+        "requireAdminApproval": false,
+        "autoExpireAfterDays": 90,
+        "maxApprovalTimeHours": null
+      }
+    },
+    {
+      "ruleId": "rule-genomic-data",
+      "name": "Genomic Data Access Rule",
+      "description": "Rules governing access to genomic and genetic datasets",
+      "appliesTo": {
+        "dataCategories": ["GENOMIC_DATA", "GENETIC_DATA", "DNA_SEQUENCES"],
+        "sensitivityLevels": ["VERY_HIGH"]
+      },
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "IN",
+          "values": ["GENOMIC_RESEARCH", "CLINICAL_TRIAL", "TREATMENT_DEVELOPMENT"]
+        },
+        {
+          "attribute": "credentials",
+          "operator": "INCLUDES_ALL",
+          "values": ["GENOMIC_RESEARCHER", "IRB_APPROVAL", "BIOETHICS_APPROVAL"]
+        },
+        {
+          "attribute": "role",
+          "operator": "EQUALS",
+          "values": ["MEDICAL_RESEARCHER"]
+        },
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.95]
+        }
+      ],
+      "privacyRequirements": {
+        "minEpsilon": 0.01,
+        "maxEpsilon": 0.1,
+        "minDelta": 1e-10,
+        "maxDelta": 1e-8,
+        "requireDifferentialPrivacy": true,
+        "noiseDistribution": "GAUSSIAN",
+        "requireSecureMPC": true,
+        "requireZKP": true,
+        "requireFederatedLearning": true
+      },
+      "timeRestrictions": {
+        "maxSessionDuration": 4,
+        "allowedTimeWindows": [
+          {
+            "startTime": "09:00:00",
+            "endTime": "17:00:00",
+            "timezone": "UTC",
+            "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
+          }
+        ]
+      },
+      "approvalWorkflow": {
+        "requireDataOwnerApproval": true,
+        "requireAdminApproval": true,
+        "requireEthicsCommitteeApproval": true,
+        "autoExpireAfterDays": 30,
+        "maxApprovalTimeHours": 72
+      }
+    },
+    {
+      "ruleId": "rule-environmental-data",
+      "name": "Environmental Data Access Rule",
+      "description": "Rules governing access to environmental and sensor datasets",
+      "appliesTo": {
+        "dataCategories": ["ENVIRONMENTAL_DATA", "SENSOR_DATA", "CLIMATE_DATA"],
+        "sensitivityLevels": ["LOW"]
+      },
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "IN",
+          "values": ["ENVIRONMENTAL_RESEARCH", "CLIMATE_STUDIES", "URBAN_PLANNING"]
+        },
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.6]
+        }
+      ],
+      "privacyRequirements": {
+        "minEpsilon": 1.0,
+        "maxEpsilon": 10.0,
+        "minDelta": 1e-4,
+        "maxDelta": 1e-2,
+        "requireDifferentialPrivacy": true,
+        "noiseDistribution": "LAPLACE"
+      },
+      "timeRestrictions": {
+        "maxSessionDuration": 24,
+        "allowedTimeWindows": [
+          {
+            "startTime": "00:00:00",
+            "endTime": "23:59:59",
+            "timezone": "UTC",
+            "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+          }
+        ]
+      },
+      "approvalWorkflow": {
+        "requireDataOwnerApproval": false,
+        "requireAdminApproval": false,
+        "autoExpireAfterDays": 180,
+        "maxApprovalTimeHours": null
+      }
+    }
+  ],
+  "operationalRules": [
+    {
+      "ruleId": "op-rule-regression",
+      "name": "Regression Analysis Rule",
+      "description": "Rules governing regression analysis operations",
+      "operationType": "REGRESSION",
+      "allowedRoles": ["RESEARCHER", "MEDICAL_RESEARCHER", "FINANCIAL_ANALYST"],
+      "conditions": [
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.7]
+        }
+      ],
+      "parameterConstraints": {
+        "regularization": {
+          "allowedValues": ["L1", "L2", "ELASTIC_NET"]
+        },
+        "maxIterations": {
+          "min": 100,
+          "max": 10000
+        },
+        "learningRate": {
+          "min": 0.0001,
+          "max": 0.1
+        }
+      },
+      "privacyRequirements": {
+        "clipGradients": true,
+        "addNoise": true,
+        "noiseDistribution": "SYSTEM_DEFAULT"
+      },
+      "resourceLimits": {
+        "maxComputeTimeSeconds": 1800,
+        "maxMemoryGB": 16,
+        "maxThreads": 8
+      }
+    },
+    {
+      "ruleId": "op-rule-clustering",
+      "name": "Clustering Analysis Rule",
+      "description": "Rules governing clustering analysis operations",
+      "operationType": "CLUSTERING",
+      "allowedRoles": ["RESEARCHER", "MEDICAL_RESEARCHER", "FINANCIAL_ANALYST"],
+      "conditions": [
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.7]
+        }
+      ],
+      "parameterConstraints": {
+        "algorithm": {
+          "allowedValues": ["K_MEANS", "DBSCAN", "HIERARCHICAL"]
+        },
+        "maxClusters": {
+          "min": 2,
+          "max": 50
+        },
+        "maxIterations": {
+          "min": 50,
+          "max": 5000
+        }
+      },
+      "privacyRequirements": {
+        "privatizeCentroids": true,
+        "clusterSizeThreshold": 5,
+        "suppressSmallClusters": true
+      },
+      "resourceLimits": {
+        "maxComputeTimeSeconds": 3600,
+        "maxMemoryGB": 32,
+        "maxThreads": 16
+      }
+    },
+    {
+      "ruleId": "op-rule-federated",
+      "name": "Federated Learning Rule",
+      "description": "Rules governing federated learning operations",
+      "operationType": "FEDERATED_LEARNING",
+      "allowedRoles": ["RESEARCHER", "MEDICAL_RESEARCHER", "FINANCIAL_ANALYST"],
+      "conditions": [
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.8]
+        },
+        {
+          "attribute": "datasetCount",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [2]
+        }
+      ],
+      "parameterConstraints": {
+        "rounds": {
+          "min": 1,
+          "max": 100
+        },
+        "minParticipants": {
+          "min": 2,
+          "max": 20
+        },
+        "aggregationStrategy": {
+          "allowedValues": ["FEDAVG", "WEIGHTED_AVERAGE", "MEDIAN", "TRIMMED_MEAN"]
+        }
+      },
+      "privacyRequirements": {
+        "enableDP": true,
+        "secureAggregation": true,
+        "clientSelectionRatio": {
+          "min": 0.5,
+          "max": 1.0
+        }
+      },
+      "resourceLimits": {
+        "maxComputeTimeSeconds": 7200,
+        "maxMemoryGB": 64,
+        "maxThreads": 32,
+        "maxCommunicationRounds": 100
+      }
+    },
+    {
+      "ruleId": "op-rule-statistics",
+      "name": "Statistical Analysis Rule",
+      "description": "Rules governing statistical analysis operations",
+      "operationType": "STATISTICS",
+      "allowedRoles": ["RESEARCHER", "MEDICAL_RESEARCHER", "FINANCIAL_ANALYST"],
+      "conditions": [
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.6]
+        }
+      ],
+      "parameterConstraints": {
+        "operations": {
+          "allowedValues": ["MEAN", "MEDIAN", "VARIANCE", "QUANTILES", "CORRELATION", "HYPOTHESIS_TEST"]
+        },
+        "maxDimensions": {
+          "min": 1,
+          "max": 100
+        }
+      },
+      "privacyRequirements": {
+        "addNoise": true,
+        "noiseDistribution": "SYSTEM_DEFAULT",
+        "suppressSmallCounts": true,
+        "minCountThreshold": 5
+      },
+      "resourceLimits": {
+        "maxComputeTimeSeconds": 600,
+        "maxMemoryGB": 8,
+        "maxThreads": 4
+      }
+    },
+    {
+      "ruleId": "op-rule-secure-join",
+      "name": "Secure Join Operation Rule",
+      "description": "Rules governing secure database join operations",
+      "operationType": "SECURE_JOIN",
+      "allowedRoles": ["RESEARCHER", "MEDICAL_RESEARCHER", "FINANCIAL_ANALYST"],
+      "conditions": [
+        {
+          "attribute": "trustScore",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [0.8]
+        },
+        {
+          "attribute": "datasetCount",
+          "operator": "GREATER_THAN_OR_EQUAL",
+          "values": [2]
+        }
+      ],
+      "parameterConstraints": {
+        "joinType": {
+          "allowedValues": ["INNER", "LEFT", "RIGHT", "FULL"]
+        },
+        "maxJoinColumns": {
+          "min": 1,
+          "max": 5
+        }
+      },
+      "privacyRequirements": {
+        "requireSMPC": true,
+        "requireFederatedJoin": true,
+        "suppressSmallJoins": true,
+        "minJoinSize": 3
+      },
+      "resourceLimits": {
+        "maxComputeTimeSeconds": 1800,
+        "maxMemoryGB": 32,
+        "maxThreads": 8
+      }
+    }
+  ],
+  "ipAccessControl": {
+    "enforceIPRestrictions": true,
+    "defaultPolicy": "DENY",
+    "ipRangeRules": [
+      {
+        "name": "Corporate Networks",
+        "ranges": ["192.168.0.0/16", "10.0.0.0/8"],
+        "policy": "ALLOW",
+        "roles": ["RESEARCHER", "MEDICAL_RESEARCHER", "FINANCIAL_ANALYST", "ADMIN"]
+      },
+      {
+        "name": "Research Institutions",
+        "ranges": ["172.16.0.0/12"],
+        "policy": "ALLOW",
+        "roles": ["RESEARCHER", "MEDICAL_RESEARCHER"]
+      },
+      {
+        "name": "VPN Access",
+        "ranges": ["203.0.113.0/24"],
+        "policy": "ALLOW",
+        "roles": ["ADMIN", "AUDITOR"]
+      },
+      {
+        "name": "Known Malicious",
+        "ranges": ["198.51.100.0/24"],
+        "policy": "DENY",
+        "roles": ["ALL"]
+      }
+    ],
+    "countryRules": [
+      {
+        "name": "Allowed Countries",
+        "countries": ["US", "CA", "GB", "DE", "FR", "JP", "AU", "NZ"],
+        "policy": "ALLOW",
+        "roles": ["ALL"]
+      },
+      {
+        "name": "Restricted Countries",
+        "countries": ["CN", "RU", "IR", "KP"],
+        "policy": "DENY",
+        "roles": ["ALL"]
+      }
+    ],
+    "exceptions": [
+      {
+        "name": "Admin Emergency Access",
+        "userId": "user-7c42e619",
+        "policy": "ALLOW",
+        "expirationDate": "2025-12-31T23:59:59Z"
+      }
+    ]
+  },
+  "timeBasedRestrictions": {
+    "enforceTimeRestrictions": true,
+    "defaultAllowedTimes": {
+      "startTime": "08:00:00",
+      "endTime": "20:00:00",
+      "timezone": "UTC",
+      "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
+    },
+    "exceptions": [
+      {
+        "name": "Extended Research Hours",
+        "roles": ["RESEARCHER", "MEDICAL_RESEARCHER"],
+        "startTime": "00:00:00",
+        "endTime": "23:59:59",
+        "timezone": "UTC",
+        "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+      },
+      {
+        "name": "Admin Emergency Access",
+        "roles": ["ADMIN"],
+        "startTime": "00:00:00",
+        "endTime": "23:59:59",
+        "timezone": "UTC",
+        "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+      }
+    ],
+    "maintenanceWindows": [
+      {
+        "name": "Weekly Maintenance",
+        "startTime": "02:00:00",
+        "endTime": "04:00:00",
+        "timezone": "UTC",
+        "day": "SUNDAY",
+        "accessLevel": "ADMIN_ONLY"
+      }
+    ]
+  },
+  "attributeBasedAccessControl": {
+    "enforceABAC": true,
+    "attributes": [
+      {
+        "name": "trustScore",
+        "description": "User trust score based on past behavior",
+        "type": "FLOAT",
+        "range": [0.0, 1.0],
+        "defaultValue": 0.5,
+        "updateMethod": "SYSTEM_CALCULATED"
+      },
+      {
+        "name": "institutionType",
+        "description": "Type of institution the user belongs to",
+        "type": "STRING",
+        "allowedValues": ["ACADEMIC", "COMMERCIAL", "GOVERNMENT", "NONPROFIT", "HEALTHCARE"],
+        "defaultValue": null,
+        "updateMethod": "USER_PROVIDED"
+      },
+      {
+        "name": "certificationLevel",
+        "description": "Highest certification level achieved by user",
+        "type": "STRING",
+        "allowedValues": ["NONE", "BASIC", "INTERMEDIATE", "ADVANCED", "EXPERT"],
+        "defaultValue": "NONE",
+        "updateMethod": "VERIFIED_CREDENTIALS"
+      },
+      {
+        "name": "purposeCategory",
+        "description": "Primary purpose for data access",
+        "type": "STRING",
+        "allowedValues": ["SCIENTIFIC_RESEARCH", "MEDICAL_RESEARCH", "PUBLIC_HEALTH", "FRAUD_DETECTION", "MARKETING_RESEARCH", "PRODUCT_DEVELOPMENT"],
+        "defaultValue": null,
+        "updateMethod": "REQUEST_SPECIFIC"
+      },
+      {
+        "name": "dataCategory",
+        "description": "Category of data being accessed",
+        "type": "STRING",
+        "allowedValues": ["HEALTH_DATA", "FINANCIAL_DATA", "USER_BEHAVIOR", "GENOMIC_DATA", "ENVIRONMENTAL_DATA"],
+        "defaultValue": null,
+        "updateMethod": "DATASET_DEFINED"
+      },
+      {
+        "name": "privacyBudgetRemaining",
+        "description": "Remaining privacy budget for the dataset",
+        "type": "FLOAT",
+        "range": [0.0, null],
+        "defaultValue": null,
+        "updateMethod": "SYSTEM_CALCULATED"
+      }
+    ],
+    "policies": [
+      {
+        "name": "Medical Data ABAC Policy",
+        "description": "ABAC policy for medical data access",
+        "rules": [
+          {
+            "effect": "ALLOW",
+            "condition": {
+              "operator": "AND",
+              "conditions": [
+                {
+                  "attribute": "trustScore",
+                  "operator": "GREATER_THAN_OR_EQUAL",
+                  "value": 0.85
+                },
+                {
+                  "attribute": "institutionType",
+                  "operator": "IN",
+                  "values": ["ACADEMIC", "HEALTHCARE", "GOVERNMENT"]
+                },
+                {
+                  "attribute": "certificationLevel",
+                  "operator": "IN",
+                  "values": ["ADVANCED", "EXPERT"]
+                },
+                {
+                  "attribute": "purposeCategory",
+                  "operator": "IN",
+                  "values": ["MEDICAL_RESEARCH", "PUBLIC_HEALTH"]
+                },
+                {
+                  "attribute": "privacyBudgetRemaining",
+                  "operator": "GREATER_THAN",
+                  "value": 0.0
+                }
+              ]
+            }
+          },
+          {
+            "effect": "DENY",
+            "condition": {
+              "operator": "OR",
+              "conditions": [
+                {
+                  "attribute": "trustScore",
+                  "operator": "LESS_THAN",
+                  "value": 0.85
+                },
+                {
+                  "attribute": "privacyBudgetRemaining",
+                  "operator": "EQUALS",
+                  "value": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Financial Data ABAC Policy",
+        "description": "ABAC policy for financial data access",
+        "rules": [
+          {
+            "effect": "ALLOW",
+            "condition": {
+              "operator": "AND",
+              "conditions": [
+                {
+                  "attribute": "trustScore",
+                  "operator": "GREATER_THAN_OR_EQUAL",
+                  "value": 0.9
+                },
+                {
+                  "attribute": "certificationLevel",
+                  "operator": "IN",
+                  "values": ["EXPERT"]
+                },
+                {
+                  "attribute": "purposeCategory",
+                  "operator": "IN",
+                  "values": ["FRAUD_DETECTION", "FINANCIAL_RESEARCH"]
+                }
+              ]
+            }
+          },
+          {
+            "effect": "DENY",
+            "condition": {
+              "operator": "OR",
+              "conditions": [
+                {
+                  "attribute": "trustScore",
+                  "operator": "LESS_THAN",
+                  "value": 0.9
+                },
+                {
+                  "attribute": "purposeCategory",
+                  "operator": "EQUALS",
+                  "value": "MARKETING_RESEARCH"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "rateLimit": {
+    "enabled": true,
+    "limitsByRole": {
+      "ADMIN": {
+        "requestsPerMinute": 60,
+        "requestsPerHour": 1000,
+        "requestsPerDay": 5000
+      },
+      "RESEARCHER": {
+        "requestsPerMinute": 30,
+        "requestsPerHour": 500,
+        "requestsPerDay": 2000
+      },
+      "DATA_OWNER": {
+        "requestsPerMinute": 20,
+        "requestsPerHour": 300,
+        "requestsPerDay": 1000
+      },
+      "AUDITOR": {
+        "requestsPerMinute": 10,
+        "requestsPerHour": 100,
+        "requestsPerDay": 500
+      }
+    },
+    "limitsByOperation": {
+      "REGRESSION": {
+        "requestsPerHour": 10,
+        "requestsPerDay": 50
+      },
+      "CLUSTERING": {
+        "requestsPerHour": 5,
+        "requestsPerDay": 20
+      },
+      "FEDERATED_LEARNING": {
+        "requestsPerHour": 2,
+        "requestsPerDay": 10
+      },
+      "SECURE_JOIN": {
+        "requestsPerHour": 3,
+        "requestsPerDay": 15
+      }
+    },
+    "limitsByDatasetSensitivity": {
+      "LOW": {
+        "requestsPerHour": 50,
+        "requestsPerDay": 200
+      },
+      "MEDIUM": {
+        "requestsPerHour": 20,
+        "requestsPerDay": 100
+      },
+      "HIGH": {
+        "requestsPerHour": 5,
+        "requestsPerDay": 20
+      },
+      "VERY_HIGH": {
+        "requestsPerHour": 2,
+        "requestsPerDay": 5
+      }
+    },
+    "burstAllowance": {
+      "enabled": true,
+      "maxBurstSize": 10,
+      "burstRecoverySeconds": 60
+    }
+  },
+  "approvalWorkflows": [
+    {
+      "workflowId": "approval-standard",
+      "name": "Standard Approval Workflow",
+      "description": "Standard workflow for most data access approvals",
+      "steps": [
+        {
+          "stepId": "step-1",
+          "type": "SYSTEM_VALIDATION",
+          "description": "Validate request against access rules",
+          "requiredOutcome": "VALID"
+        },
+        {
+          "stepId": "step-2",
+          "type": "DATA_OWNER_APPROVAL",
+          "description": "Data owner reviews and approves request",
+          "timeout": 48,
+          "escalation": "NOTIFY_ADMIN"
+        },
+        {
+          "stepId": "step-3",
+          "type": "PRIVACY_BUDGET_CHECK",
+          "description": "Verify sufficient privacy budget exists",
+          "requiredOutcome": "SUFFICIENT"
+        }
+      ],
+      "timeoutHours": 72,
+      "notificationRecipients": ["DATA_OWNER", "REQUESTER"],
+      "autoApproveWhenApplicable": false
+    },
+    {
+      "workflowId": "approval-high-sensitivity",
+      "name": "High-Sensitivity Approval Workflow",
+      "description": "Workflow for high and very high sensitivity data",
+      "steps": [
+        {
+          "stepId": "step-1",
+          "type": "SYSTEM_VALIDATION",
+          "description": "Validate request against access rules",
+          "requiredOutcome": "VALID"
+        },
+        {
+          "stepId": "step-2",
+          "type": "ZKP_VERIFICATION",
+          "description": "Verify zero-knowledge proofs",
+          "requiredOutcome": "VERIFIED"
+        },
+        {
+          "stepId": "step-3",
+          "type": "DATA_OWNER_APPROVAL",
+          "description": "Data owner reviews and approves request",
+          "timeout": 48,
+          "escalation": "REJECT"
+        },
+        {
+          "stepId": "step-4",
+          "type": "ADMIN_APPROVAL",
+          "description": "Admin reviews and approves request",
+          "timeout": 24,
+          "escalation": "REJECT"
+        },
+        {
+          "stepId": "step-5",
+          "type": "PRIVACY_BUDGET_CHECK",
+          "description": "Verify sufficient privacy budget exists",
+          "requiredOutcome": "SUFFICIENT"
+        }
+      ],
+      "timeoutHours": 96,
+      "notificationRecipients": ["DATA_OWNER", "ADMIN", "REQUESTER"],
+      "autoApproveWhenApplicable": false
+    },
+    {
+      "workflowId": "approval-genomic",
+      "name": "Genomic Data Approval Workflow",
+      "description": "Specialized workflow for genomic data access",
+      "steps": [
+        {
+          "stepId": "step-1",
+          "type": "SYSTEM_VALIDATION",
+          "description": "Validate request against access rules",
+          "requiredOutcome": "VALID"
+        },
+        {
+          "stepId": "step-2",
+          "type": "ZKP_VERIFICATION",
+          "description": "Verify zero-knowledge proofs",
+          "requiredOutcome": "VERIFIED"
+        },
+        {
+          "stepId": "step-3",
+          "type": "CREDENTIAL_VERIFICATION",
+          "description": "Verify medical and research credentials",
+          "requiredOutcome": "VERIFIED"
+        },
+        {
+          "stepId": "step-4",
+          "type": "DATA_OWNER_APPROVAL",
+          "description": "Data owner reviews and approves request",
+          "timeout": 72,
+          "escalation": "REJECT"
+        },
+        {
+          "stepId": "step-5",
+          "type": "ETHICS_COMMITTEE_APPROVAL",
+          "description": "Ethics committee reviews and approves",
+          "timeout": 120,
+          "escalation": "REJECT"
+        },
+        {
+          "stepId": "step-6",
+          "type": "ADMIN_APPROVAL",
+          "description": "Admin reviews and approves request",
+          "timeout": 24,
+          "escalation": "REJECT"
+        },
+        {
+          "stepId": "step-7",
+          "type": "PRIVACY_BUDGET_CHECK",
+          "description": "Verify sufficient privacy budget exists",
+          "requiredOutcome": "SUFFICIENT"
+        }
+      ],
+      "timeoutHours": 192,
+      "notificationRecipients": ["DATA_OWNER", "ADMIN", "ETHICS_COMMITTEE", "REQUESTER"],
+      "autoApproveWhenApplicable": false
+    },
+    {
+      "workflowId": "approval-low-sensitivity",
+      "name": "Low-Sensitivity Auto-Approval Workflow",
+      "description": "Streamlined workflow for low sensitivity data",
+      "steps": [
+        {
+          "stepId": "step-1",
+          "type": "SYSTEM_VALIDATION",
+          "description": "Validate request against access rules",
+          "requiredOutcome": "VALID"
+        },
+        {
+          "stepId": "step-2",
+          "type": "PRIVACY_BUDGET_CHECK",
+          "description": "Verify sufficient privacy budget exists",
+          "requiredOutcome": "SUFFICIENT"
+        }
+      ],
+      "timeoutHours": 1,
+      "notificationRecipients": ["DATA_OWNER"],
+      "autoApproveWhenApplicable": true
+    }
+  ],
+  "emergencyAccessRules": {
+    "enabled": true,
+    "authorizedRoles": ["ADMIN"],
+    "emergencyReasons": [
+      "SECURITY_INCIDENT",
+      "SYSTEM_FAILURE",
+      "DATA_CORRUPTION",
+      "LEGAL_REQUIREMENT"
+    ],
+    "approvalRequirements": {
+      "multiFactorAuthentication": true,
+      "supervisorNotification": true,
+      "auditLogGeneration": true,
+      "timeLimit": 4
+    },
+    "postEmergencyActions": [
+      "FULL_AUDIT",
+      "ACCESS_REVOCATION",
+      "INCIDENT_REPORT",
+      "ROOT_CAUSE_ANALYSIS"
+    ]
+  },
+  "complianceRequirements": {
+    "gdpr": {
+      "enabled": true,
+      "measures": [
+        "DATA_MINIMIZATION",
+        "PURPOSE_LIMITATION",
+        "STORAGE_LIMITATION",
+        "RIGHT_TO_ACCESS",
+        "RIGHT_TO_RECTIFICATION",
+        "RIGHT_TO_ERASURE",
+        "RIGHT_TO_RESTRICTION",
+        "RIGHT_TO_DATA_PORTABILITY",
+        "RIGHT_TO_OBJECT"
+      ],
+      "requireExplicitConsent": true,
+      "enforceStorageLimitation": true,
+      "dataSubjectRightsSupported": true
+    },
+    "hipaa": {
+      "enabled": true,
+      "measures": [
+        "PHI_PROTECTION",
+        "MINIMUM_NECESSARY_ACCESS",
+        "AUDIT_CONTROLS",
+        "INTEGRITY_CONTROLS",
+        "TRANSMISSION_SECURITY"
+      ],
+      "requireBusinessAssociateAgreement": true,
+      "enforceMinimumNecessary": true
+    },
+    "ccpa": {
+      "enabled": true,
+      "measures": [
+        "RIGHT_TO_KNOW",
+        "RIGHT_TO_DELETE",
+        "RIGHT_TO_OPT_OUT",
+        "RIGHT_TO_NON_DISCRIMINATION"
+      ],
+      "honorsDoNotSellRequest": true
+    }
+  },
+  "datasetTypeSpecificRules": {
+    "medicalImaging": {
+      "enabled": true,
+      "accessRules": {
+        "requiredCredentials": ["MEDICAL_LICENSE", "IRB_APPROVAL"],
+        "minimumPrivacyEpsilon": 0.1,
+        "requireDeidentification": true,
+        "prohibitedFeatures": ["FACIAL_RECOGNITION", "UNIQUE_IDENTIFIERS"]
+      }
+    },
+    "financialTransactions": {
+      "enabled": true,
+      "accessRules": {
+        "requiredCredentials": ["FINANCIAL_CERTIFICATION", "ANTI_MONEY_LAUNDERING_CERTIFICATION"],
+        "minimumPrivacyEpsilon": 0.05,
+        "requireDataMasking": true,
+        "prohibitedFeatures": ["ACCOUNT_NUMBERS", "PERSONAL_IDENTIFIERS"]
+      }
+    },
+    "genomicSequences": {
+      "enabled": true,
+      "accessRules": {
+        "requiredCredentials": ["GENOMIC_RESEARCHER_CERTIFICATION", "IRB_APPROVAL", "BIOETHICS_APPROVAL"],
+        "minimumPrivacyEpsilon": 0.01,
+        "requireFederatedComputation": true,
+        "prohibitedFeatures": ["IDENTIFIABLE_MARKERS", "FAMILY_LINKAGES"]
+      }
+    }
+  }
+}
