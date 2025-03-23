@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PrivaSight - The Privacy-Preserving Data Analytics Platform">
+    <meta name="keywords" content="differential privacy, federated learning, privacy, data analytics, secure multi-party computation">
+    <meta name="author" content="PrivaSight Team">
+    <title>PrivaSight | Privacy-Preserving Data Analytics</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="css/main.min.css" as="style">
+    <link rel="preload" href="js/core.min.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.min.css">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="PrivaSight | Privacy-Preserving Data Analytics">
+    <meta property="og:description" content="Unlock the power of data without compromising privacy. PrivaSight offers cutting-edge differential privacy, federated learning, and secure computation solutions.">
+    <meta property="og:image" content="https://privasight.io/assets/social-preview.jpg">
+    <meta property="og:url" content="https://privasight.io">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Theme Color for Browser -->
+    <meta name="theme-color" content="#4A56E2">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Critical CSS Inlined for Performance -->
+    <style>
+        :root {
+            --primary-color: #4A56E2;
+            --primary-dark: #3A46C2;
+            --primary-light: #6A76F2;
+            --primary-hover: #5A66F2;
+            --primary-active: #2A36B2;
+            --secondary-color: #34D399;
+            --secondary-dark: #24B379;
+            --secondary-light: #54F3B9;
+            --text-color: #1F2937;
+            --text-light: #6B7280;
+            --background-color: #F9FAFB;
+            --background-alt: #F3F4F6;
+            --surface-color: #FFFFFF;
+            --border-color: #E5E7EB;
+            --error-color: #EF4444;
+            --warning-color: #F59E0B;
+            --info-color: #3B82F6;
+            --success-color: #10B981;
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Dark Mode Colors */
+        .dark-mode {
+            --primary-color: #6366F1;
+            --primary-dark: #4F46E5;
+            --primary-light: #818CF8;
+            --secondary-color: #34D399;
+            --secondary-dark: #10B981;
+            --secondary-light: #6EE7B7;
+            --text-color: #F9FAFB;
+            --text-light: #D1D5DB;
+            --background-color: #111827;
+            --background-alt: #1F2937;
+            --surface-color: #1F2937;
+            --border-color: #374151;
+            --error-color: #F87171;
+            --warning-color: #FBBF24;
+            --info-color: #60A5FA;
+            --success-color: #34D399;
+        }
+        
+        @font-face {
+            font-family: 'Inter var';
+            font-weight: 100 900;
+            font-display: swap;
+            font-style: normal;
+            font-named-instance: 'Regular';
+            src: url("fonts/inter-var.woff2") format("woff2");
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter var', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            overflow-x: hidden;
+        }
+        
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 6px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            animation: spin 1s infinite linear;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+        
+        /* Enhanced Styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--background-color) 0%, var(--background-alt) 100%);
+            padding: 4rem 0;
+        }
+        
+        .hero-content {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .notifications-panel {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .notifications-panel.show {
+            transform: translateX(0);
+        }
+        
+        .modal {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .footer-links a {
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-link {
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="assets/logo-animated.svg" alt="PrivaSight Logo" class="loading-logo" loading="lazy">
+        <div class="loader"></div>
+        <p id="loadingMessage">Initializing secure environment...</p>
+    </div>
+
+    <!-- Main Application Container -->
+    <div class="app-container" id="appContainer">
+        <!-- Navigation -->
+        <header class="app-header">
+            <nav class="main-nav">
+                <div class="nav-container">
+                    <div class="nav-logo">
+                        <a href="/">
+                            <img src="assets/logo.svg" alt="PrivaSight Logo" class="logo-image" loading="lazy">
+                            <span class="logo-text">PrivaSight</span>
+                        </a>
+                    </div>
+                    <div class="nav-links">
+                        <ul class="desktop-nav">
+                            <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
+                            <li><a href="/datasets" class="nav-link">Datasets</a></li>
+                            <li><a href="/analytics" class="nav-link">Analytics</a></li>
+                            <li class="dropdown">
+                                <button class="dropdown-toggle">Privacy Tools</button>
+                                <div class="dropdown-menu">
+                                    <a href="/tools/federated-learning">Federated Learning</a>
+                                    <a href="/tools/differential-privacy">Differential Privacy</a>
+                                    <a href="/tools/secure-mpc">Secure MPC</a>
+                                    <a href="/tools/zero-knowledge">Zero-Knowledge Proofs</a>
+                                </div>
+                            </li>
+                            <li><a href="/documentation" class="nav-link">Documentation</a></li>
+                        </ul>
+                        <div class="nav-controls">
+                            <button id="darkModeToggle" class="icon-button" aria-label="Toggle Dark Mode">
+                                <svg class="icon-dark-mode" viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+                                </svg>
+                            </button>
+                            <button id="notificationsButton" class="icon-button" aria-label="Notifications">
+                                <svg class="icon-notifications" viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+                                </svg>
+                                <span class="notification-badge" id="notificationCount">2</span>
+                            </button>
+                            <div class="user-profile dropdown">
+                                <button class="profile-toggle dropdown-toggle">
+                                    <img src="assets/default-avatar.png" alt="User Avatar" class="avatar-image" loading="lazy">
+                                    <span class="user-name">Researcher</span>
+                                </button>
+                                <div class="dropdown-menu profile-menu">
+                                    <a href="/profile">My Profile</a>
+                                    <a href="/settings">Settings</a>
+                                    <a href="/privacy-budget">Privacy Budget</a>
+                                    <hr>
+                                    <a href="/logout" class="text-error">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="mobileMenuToggle" class="mobile-menu-button" aria-label="Toggle Mobile Menu">
+                            <span class="menu-icon"></span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Mobile Navigation Menu -->
+                <div class="mobile-nav-container" id="mobileNavContainer">
+                    <ul class="mobile-nav">
+                        <li><a href="/dashboard" class="mobile-nav-link">Dashboard</a></li>
+                        <li><a href="/datasets" class="mobile-nav-link">Datasets</a></li>
+                        <li><a href="/analytics" class="mobile-nav-link">Analytics</a></li>
+                        <li class="mobile-dropdown">
+                            <button class="mobile-dropdown-toggle">Privacy Tools</button>
+                            <div class="mobile-dropdown-content">
+                                <a href="/tools/federated-learning">Federated Learning</a>
+                                <a href="/tools/differential-privacy">Differential Privacy</a>
+                                <a href="/tools/secure-mpc">Secure MPC</a>
+                                <a href="/tools/zero-knowledge">Zero-Knowledge Proofs</a>
+                            </div>
+                        </li>
+                        <li><a href="/documentation" class="mobile-nav-link">Documentation</a></li>
+                        <li><a href="/profile" class="mobile-nav-link">My Profile</a></li>
+                        <li><a href="/settings" class="mobile-nav-link">Settings</a></li>
+                        <li><a href="/logout" class="mobile-nav-link text-error">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Current View Rendered Here by the Router -->
+            <div id="viewContainer">
+                <!-- Default Landing View -->
+                <section class="landing-view">
+                    <div class="hero-section">
+                        <div class="hero-content">
+                            <h1 class="hero-title">Privacy-Preserving Data Analytics Platform</h1>
+                            <p class="hero-description">
+                                Unlock valuable insights from sensitive data without compromising privacy.
+                                PrivaSight provides state-of-the-art privacy-preserving technologies for
+                                collaborative analytics.
+                            </p>
+                            <div class="hero-actions">
+                                <button class="button button-primary">Get Started</button>
+                                <button class="button button-secondary">Learn More</button>
+                            </div>
+                        </div>
+                        <div class="hero-graphic">
+                            <img src="assets/hero-illustration.svg" alt="Privacy-Preserving Analytics Illustration" class="hero-image" loading="lazy">
+                        </div>
+                    </div>
+
+                    <div class="features-section">
+                        <h2 class="section-title">Core Privacy Technologies</h2>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" width="48" height="48">
+                                        <path fill="var(--primary-color)" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Differential Privacy</h3>
+                                <p class="feature-description">
+                                    Protect individual data points with mathematically proven privacy guarantees
+                                    while maintaining statistical accuracy.
+                                </p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" width="48" height="48">
+                                        <path fill="var(--primary-color)" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Federated Learning</h3>
+                                <p class="feature-description">
+                                    Train machine learning models across multiple devices or servers while keeping data localized and private.
+                                </p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" width="48" height="48">
+                                        <path fill="var(--primary-color)" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Secure MPC</h3>
+                                <p class="feature-description">
+                                    Perform computations on encrypted data from multiple parties without
+                                    revealing individual inputs.
+                                </p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24" width="48" height="48">
+                                        <path fill="var(--primary-color)" d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Zero-Knowledge Proofs</h3>
+                                <p class="feature-description">
+                                    Verify facts about data without revealing the data itself, enabling
+                                    privacy-preserving authentication and validation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-section">
+                        <h2 class="section-title">How PrivaSight Works</h2>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Data Contribution</h3>
+                                    <p class="step-description">
+                                        Data owners securely upload encrypted datasets and set privacy policies.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Privacy Settings</h3>
+                                    <p class="step-description">
+                                        Configure differential privacy parameters, access controls, and privacy budgets.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Privacy-Preserving Analysis</h3>
+                                    <p class="step-description">
+                                        Researchers run analyses through privacy mechanisms without accessing raw data.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Secure Results</h3>
+                                    <p class="step-description">
+                                        Obtain valuable insights with mathematical privacy guarantees and audit trails.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-section">
+                        <div class="cta-content">
+                            <h2 class="cta-title">Ready to unlock insights while protecting privacy?</h2>
+                            <p class="cta-description">
+                                Join leading organizations that use PrivaSight to collaborate on sensitive data
+                                with confidence.
+                            </p>
+                            <button class="button button-primary">Request Demo</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Application Footer -->
+        <footer class="app-footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <img src="assets/logo-light.svg" alt="PrivaSight Logo" class="footer-logo" loading="lazy">
+                    <p class="footer-tagline">
+                        Empowering data collaboration with privacy by design.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/privasight" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/privasight" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.24.73-.53v-1.86c-3.03.66-3.67-1.45-3.67-1.45-.5-1.29-1.21-1.63-1.21-1.63-.99-.68.07-.67.07-.67 1.09.08 1.67 1.13 1.67 1.13.97 1.66 2.55 1.18 3.17.9.1-.7.37-1.18.67-1.45-2.34-.26-4.8-1.17-4.8-5.2 0-1.16.41-2.1 1.08-2.84-.1-.26-.47-1.31.1-2.74 0 0 .9-.27 2.9 1.08a9.86 9.86 0 015.2 0c2-1.35 2.88-1.08 2.88-1.08.58 1.43.22 2.48.11 2.74.68.74 1.09 1.68 1.09 2.84 0 4.04-2.46 4.94-4.8 5.2.38.33.71.97.71 1.96v2.9c0 .28.18.6.73.52A11 11 0 0012 1.27"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/company/privasight" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="/features">Features</a></li>
+                        <li><a href="/pricing">Pricing</a></li>
+                        <li><a href="/security">Security</a></li>
+                        <li><a href="/compliance">Compliance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/documentation">Documentation</a></li>
+                        <li><a href="/api">API Reference</a></li>
+                        <li><a href="/tutorials">Tutorials</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/press">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/dpa">Data Processing Agreement</a></li>
+                        <li><a href="/cookies">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 PrivaSight, Inc. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="/sitemap">Sitemap</a>
+                    <span class="separator">|</span>
+                    <button id="cookiePreferences" class="link-button">Cookie Preferences</button>
+                    <span class="separator">|</span>
+                    <a href="/accessibility">Accessibility</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Cookie Consent Banner -->
+        <div class="cookie-banner" id="cookieBanner">
+            <div class="cookie-content">
+                <h3 class="cookie-title">Cookie Consent</h3>
+                <p class="cookie-text">
+                    We use cookies to enhance your experience, analyze site usage, and assist in our marketing efforts.
+                    By continuing to use our site, you accept our use of cookies.
+                </p>
+                <div class="cookie-actions">
+                    <button id="cookieAcceptAll" class="button button-primary">Accept All</button>
+                    <button id="cookieAcceptEssential" class="button button-secondary">Essential Only</button>
+                    <button id="cookieSettings" class="button button-text">Customize Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Panel (hidden by default) -->
+        <div class="notifications-panel" id="notificationsPanel">
+            <div class="notifications-header">
+                <h3 class="notifications-title">Notifications</h3>
+                <button id="markAllRead" class="link-button">Mark all as read</button>
+            </div>
+            <div class="notifications-list">
+                <div class="notification-item unread">
+                    <div class="notification-icon info">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-text">Your analysis job <strong>Regression-92845</strong> has completed successfully.</p>
+                        <span class="notification-time">2 minutes ago</span>
+                    </div>
+                    <button class="notification-dismiss" aria-label="Dismiss Notification">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="notification-item unread">
+                    <div class="notification-icon warning">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor" d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-text">Your privacy budget for dataset <strong>Dataset-38721</strong> is running low (20% remaining).</p>
+                        <span class="notification-time">1 hour ago</span>
+                    </div>
+                    <button class="notification-dismiss" aria-label="Dismiss Notification">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon success">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-text">Access request for dataset <strong>Dataset-92845</strong> has been approved.</p>
+                        <span class="notification-time">Yesterday</span>
+                    </div>
+                    <button class="notification-dismiss" aria-label="Dismiss Notification">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon error">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <p class="notification-text">Federated learning job <strong>FL-67123</strong> failed due to insufficient participants.</p>
+                        <span class="notification-time">2 days ago</span>
+                    </div>
+                    <button class="notification-dismiss" aria-label="Dismiss Notification">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="notifications-footer">
+                <a href="/notifications" class="view-all-link">View all notifications</a>
+            </div>
+        </div>
+
+        <!-- Modal Templates -->
+        <div class="modal-container" id="modalContainer">
+            <!-- Modal backdrop -->
+            <div class="modal-backdrop" id="modalBackdrop"></div>
+            
+            <!-- Example Modal: Privacy Budget -->
+            <div class="modal" id="privacyBudgetModal" aria-labelledby="privacyBudgetModalTitle" aria-hidden="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="privacyBudgetModalTitle">Privacy Budget Settings</h2>
+                        <button class="modal-close" aria-label="Close Modal">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="datasetSelector">Select Dataset</label>
+                            <select id="datasetSelector" class="form-control">
+                                <option value="dataset-92845">Anonymized Patient Health Records</option>
+                                <option value="dataset-38721">Financial Transaction Patterns</option>
+                                <option value="dataset-71934">Environmental Sensor Network</option>
+                            </select>
+                        </div>
+                        
+                        <div class="budget-summary">
+                            <div class="budget-card">
+                                <h3 class="budget-title">Total Budget</h3>
+                                <div class="budget-value">10.0</div>
+                                <div class="budget-unit">epsilon</div>
+                            </div>
+                            <div class="budget-card">
+                                <h3 class="budget-title">Used Budget</h3>
+                                <div class="budget-value">2.7</div>
+                                <div class="budget-unit">epsilon</div>
+                            </div>
+                            <div class="budget-card">
+                                <h3 class="budget-title">Remaining Budget</h3>
+                                <div class="budget-value">7.3</div>
+                                <div class="budget-unit">epsilon</div>
+                            </div>
+                        </div>
+                        
+                        <div class="budget-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 27%;"></div>
+                            </div>
+                            <div class="progress-label">27% Used</div>
+                        </div>
+                        
+                        <div class="budget-settings">
+                            <div class="form-group">
+                                <label for="defaultEpsilon">Default Epsilon per Query</label>
+                                <input type="number" id="defaultEpsilon" class="form-control" value="0.5" min="0.1" max="2.0" step="0.1">
+                                <div class="form-help">Lower values provide stronger privacy but less accuracy.</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="budgetResetPeriod">Budget Reset Period</label>
+                                <select id="budgetResetPeriod" class="form-control">
+                                    <option value="WEEKLY">Weekly</option>
+                                    <option value="MONTHLY" selected>Monthly</option>
+                                    <option value="QUARTERLY">Quarterly</option>
+                                    <option value="ANNUALLY">Annually</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="notificationThreshold">Low Budget Notification Threshold</label>
+                                <input type="number" id="notificationThreshold" class="form-control" value="20" min="5" max="50" step="5">
+                                <div class="form-help">Percentage remaining that triggers a notification.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="budget-usage">
+                            <h3 class="section-subtitle">Recent Budget Usage</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Operation</th>
+                                        <th>Epsilon Used</th>
+                                        <th>Remaining</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mar 05, 2025</td>
+                                        <td>Statistics Computation</td>
+                                        <td>1.0</td>
+                                        <td>7.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Feb 15, 2025</td>
+                                        <td>Clustering Analysis</td>
+                                        <td>1.2</td>
+                                        <td>8.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jan 20, 2025</td>
+                                        <td>Regression Analysis</td>
+                                        <td>0.5</td>
+                                        <td>9.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="button button-secondary modal-close">Cancel</button>
+                        <button class="button button-primary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications Container -->
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="js/core.min.js" defer></script>
+    <script src="js/router.min.js" defer></script>
+    <script src="js/auth.min.js" defer></script>
+    
+    <!-- Main Application Script -->
+    <script>
+        // Initialize the application when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components with a slight delay to ensure smooth animations
+            setTimeout(function() {
+                // Hide loading screen
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('hidden');
+                
+                // Initialize application components
+                initializeApp();
+                
+                // Display cookie banner if needed
+                if (!localStorage.getItem('cookieConsent')) {
+                    document.getElementById('cookieBanner').classList.add('show');
+                }
+            }, 1500);
+        });
+        
+        // Application initialization
+        function initializeApp() {
+            initNavigation();
+            initDarkMode();
+            initNotifications();
+            initModals();
+            initRouter();
+        }
+        
+        // Initialize navigation functionality
+        function initNavigation() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNavContainer = document.getElementById('mobileNavContainer');
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenuToggle.classList.toggle('active');
+                mobileNavContainer.classList.toggle('active');
+            });
+            
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('active');
+                    dropdownToggles.forEach(otherToggle => {
+                        if (otherToggle !== toggle) otherToggle.parentElement.classList.remove('active');
+                    });
+                });
+            });
+            
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown.active').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+                mobileMenuToggle.classList.remove('active');
+                mobileNavContainer.classList.remove('active');
+            });
+            
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.parentElement.classList.toggle('active');
+                });
+            });
+        }
+        
+        // Initialize dark mode functionality
+        function initDarkMode() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const storedTheme = localStorage.getItem('theme');
+            
+            if (storedTheme) {
+                document.body.classList.toggle('dark-mode', storedTheme === 'dark');
+            } else if (prefersDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+            
+            darkModeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            });
+        }
+        
+        // Initialize notifications functionality
+        function initNotifications() {
+            const notificationsButton = document.getElementById('notificationsButton');
+            const notificationsPanel = document.getElementById('notificationsPanel');
+            const markAllReadButton = document.getElementById('markAllRead');
+            const dismissButtons = document.querySelectorAll('.notification-dismiss');
+            
+            notificationsButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationsPanel.classList.toggle('show');
+                document.querySelectorAll('.dropdown.active').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!notificationsPanel.contains(e.target) && e.target !== notificationsButton) {
+                    notificationsPanel.classList.remove('show');
+                }
+            });
+            
+            markAllReadButton.addEventListener('click', function() {
+                document.querySelectorAll('.notification-item.unread').forEach(item => {
+                    item.classList.remove('unread');
+                });
+                document.getElementById('notificationCount').textContent = '0';
+                document.getElementById('notificationCount').classList.add('hidden');
+            });
+            
+            dismissButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const notificationItem = button.closest('.notification-item');
+                    notificationItem.classList.add('removing');
+                    setTimeout(() => {
+                        notificationItem.remove();
+                        const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+                        document.getElementById('notificationCount').textContent = unreadCount;
+                        if (unreadCount === 0) document.getElementById('notificationCount').classList.add('hidden');
+                    }, 300);
+                });
+            });
+        }
+        
+        // Initialize modal functionality
+        function initModals() {
+            const modalTriggers = document.querySelectorAll('[data-modal]');
+            const modalBackdrop = document.getElementById('modalBackdrop');
+            const modalCloseButtons = document.querySelectorAll('.modal-close');
+            
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        document.getElementById('modalContainer').classList.add('active');
+                        modal.classList.add('active');
+                        document.body.classList.add('modal-open');
+                    }
+                });
+            });
+            
+            modalBackdrop.addEventListener('click', closeAllModals);
+            modalCloseButtons.forEach(button => {
+                button.addEventListener('click', closeAllModals);
+            });
+            
+            function closeAllModals() {
+                document.getElementById('modalContainer').classList.remove('active');
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.classList.remove('modal-open');
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeAllModals();
+            });
+        }
+        
+        // Initialize the router
+        function initRouter() {
+            console.log('Router initialized');
+            showToast('System initialized successfully', 'success');
+        }
+        
+        // Toast notification function
+        function showToast(message, type = 'info', duration = 5000) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <span class="toast-message">${message}</span>
+                </div>
+                <button class="toast-close" aria-label="Dismiss">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            `;
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 10);
+            const autoDismiss = setTimeout(() => dismissToast(toast), duration);
+            
+            const closeButton = toast.querySelector('.toast-close');
+            closeButton.addEventListener('click', () => {
+                clearTimeout(autoDismiss);
+                dismissToast(toast);
+            });
+            
+            function dismissToast(toast) {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+                setTimeout(() => toast.remove(), 300);
+            }
+        }
+        
+        // Cookie consent handlers
+        document.getElementById('cookieAcceptAll').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'all');
+            document.getElementById('cookieBanner').classList.remove('show');
+            showToast('All cookies accepted', 'success');
+        });
+        
+        document.getElementById('cookieAcceptEssential').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'essential');
+            document.getElementById('cookieBanner').classList.remove('show');
+            showToast('Essential cookies accepted', 'info');
+        });
+        
+        document.getElementById('cookieSettings').addEventListener('click', function() {
+            showToast('Cookie settings functionality coming soon', 'info');
+        });
+    </script>
+</body>
+</html>
