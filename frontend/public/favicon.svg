@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background Shield -->
+  <path d="M16 2 L3 8 L3 15 C3 22.1797 8.2344 28.6641 16 30 C23.7656 28.6641 29 22.1797 29 15 L29 8 Z" fill="#0056b3"/>
+  
+  <!-- Eye Symbol (Privacy) -->
+  <ellipse cx="16" cy="15" rx="6" ry="5" fill="white" />
+  <circle cx="16" cy="15" r="2.5" fill="#0056b3" />
+  
+  <!-- Privacy Line (Indicating Protection) -->
+  <path d="M10 15 L22 15" stroke="white" stroke-width="1.5" />
+</svg>
