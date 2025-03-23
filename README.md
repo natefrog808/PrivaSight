@@ -152,7 +152,7 @@ Security is our top priority. The PrivaSight platform undergoes regular security
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! See our [Contributing Guide](CONTRIBUTING.md) for more details.
+We welcome contributions from the community! 
 
 ## 📄 License
 
